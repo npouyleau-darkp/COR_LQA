@@ -11,7 +11,7 @@ function updateProviderUI(){
     if (!p || !hf || !co || !note) return;
     if (p.value === 'cohere'){
         hf.style.display = 'none'; co.style.display = 'flex';
-        note.innerHTML = '✅ <strong>Strong across all 32 languages in the dropdown above</strong> — Cohere's Command A+ officially lists 48 supported languages, including dedicated work on Arabic dialects and non-European languages. Still spot-check uncommon scripts since this model is new.';
+        note.innerHTML = '✅ <strong>Strong across all 32 languages in the dropdown above</strong> — Cohere’s Command A+ officially lists 48 supported languages, including dedicated work on Arabic dialects and non-European languages. Still spot-check uncommon scripts since this model is new.';
     } else {
         hf.style.display = 'flex'; co.style.display = 'none';
         note.innerHTML = '✅ <strong>Solid:</strong> French, Spanish, German, Italian, Portuguese, Dutch and most other Western European languages. ⚠️ <strong>Documented weak spots:</strong> Chinese and Arabic. Have a human double-check those languages, or switch to Cohere above.';
