@@ -1,5 +1,7 @@
 function buildLqaSystemPrompt(questionIndex, candidateValue, selectedLangCode, selectedLangName){
     var promptContextInstruction = "";
+    var nativeProficiencySchemaClause = "";
+    var nativeProficiencyInstruction = "";
 
     if (questionIndex === 8){
         promptContextInstruction =
@@ -14,6 +16,21 @@ function buildLqaSystemPrompt(questionIndex, candidateValue, selectedLangCode, s
             "Thoroughly audit their text for spelling mistakes, grammatical conformity, fluency, and regional style issues. " +
             "Only report issues that are likely genuine language problems. " +
             "Avoid speculative corrections and avoid treating acceptable language variations as errors.";
+
+        nativeProficiencyInstruction =
+            "NATIVE PROFICIENCY ASSESSMENT: Beyond individual errors, you must form a holistic judgment of the " +
+            "candidate's overall native-level mastery. Ask yourself: does this candidate write with the natural ease, " +
+            "idiomatic fluency, and cultural-linguistic instinct of an educated native speaker? Consider whether " +
+            "complex ideas are expressed with native-like spontaneity, or whether the writing — even if technically " +
+            "correct — feels translated, learned, or mechanically constructed. This judgment is mandatory and must " +
+            "always be captured in the nativeProficiency field of your JSON response. " +
+            "Verdict scale — " +
+            "Confirmed: the candidate writes convincingly like an educated native speaker (natural idiom, effortless register, no learner patterns). " +
+            "Borderline: mostly fluent but recurring patterns suggest non-native acquisition (e.g. calque constructions, formulaic phrasing, unnatural collocations). " +
+            "Not Demonstrated: clear signs of non-native proficiency even if individual sentences are grammatically correct.";
+
+        nativeProficiencySchemaClause =
+            '"nativeProficiency": {"verdict": "Confirmed|Borderline|Not Demonstrated", "note": "..."}, ';
     }
 
     var registerPolicy =
@@ -57,11 +74,17 @@ function buildLqaSystemPrompt(questionIndex, candidateValue, selectedLangCode, s
     }
 
     var jsonSchemaInstruction =
-        "OUTPUT FORMAT: respond with ONLY a single valid JSON object, no markdown code fences, no commentary " +
-        "before or after it, exactly matching this shape: " +
+        "STRICT OUTPUT FORMAT — NON-NEGOTIABLE: your entire reply must be one single valid JSON object. " +
+        "No markdown code fences (no ```json). No preamble. No trailing commentary. " +
+        "Any text outside the JSON object is a format violation. " +
+        "LANGUAGE OF OUTPUT — NON-NEGOTIABLE: every string value inside the JSON (issue, explanation, note, summary, verdict) " +
+        "must be written in English, regardless of the language the candidate wrote in. " +
+        "The JSON must exactly match this shape: " +
         '{"pillars": {"spelling": [{"issue": "...", "severity": "Critical|Major|Minor|Neutral", "confidence": "High|Medium|Low", "explanation": "..."}], ' +
         '"grammar": [...], "fluency": [...], "style": [...]}, ' +
-        '"regionalConsistency": {"applicable": true|false, "note": "..."}, "summary": "..."} ' +
+        '"regionalConsistency": {"applicable": true|false, "note": "..."}, ' +
+        nativeProficiencySchemaClause +
+        '"summary": "..."} ' +
         "Use an empty array for any pillar with no issues, but always include all four pillar keys. " +
         "Severity meanings — Critical: blocks understanding or changes meaning; Major: a clear error a native " +
         "speaker would immediately notice; Minor: a small, nitpick-level issue; Neutral: not actually an error, " +
@@ -69,9 +92,15 @@ function buildLqaSystemPrompt(questionIndex, candidateValue, selectedLangCode, s
         "issue; Medium: likely an issue but with some doubt; Low: flagging cautiously, could be acceptable variation.";
 
     var systemInstructionPrompt =
+        'ABSOLUTE LANGUAGE REQUIREMENT: your entire output must be written in English only — ' +
+        'no matter what language the candidate wrote in, every single word of your response must be in English. ' +
+        'This applies to every field, every explanation, every note, and every summary inside the JSON. ' +
+        'Writing any part of your output in the candidate\'s language is a critical failure. ' +
+        '\n\n' +
         'You are an authoritative Senior LQA Lead. Analyze the candidate response text for Question ' +
         questionIndex + '. ' +
         promptContextInstruction + ' ' +
+        nativeProficiencyInstruction + ' ' +
         'Evaluate the text across the following four pillars: Spelling, Grammar, Fluency, Style. ' +
         'Use the pillars as follows: ' +
         'Spelling = spelling, orthography, typographical errors, and diacritics. ' +
@@ -85,19 +114,17 @@ function buildLqaSystemPrompt(questionIndex, candidateValue, selectedLangCode, s
         culturalNuanceClause + ' ' +
         regionalConsistencyClause + ' ' +
         exceptionsClause + ' ' +
-        'CRITICAL REQUIREMENT: Write your entire analysis in English only. ' +
-        'All headings, comments, explanations, examples, and summaries must be written in English only. ' +
-        'Do not write any part of the audit in the language used by the candidate. ' +
         jsonSchemaInstruction + ' ' +
-        'The candidate’s text to audit is delimited below between <CANDIDATE_TEXT_TO_AUDIT> and ' +
+        'The candidate\'s text to audit is delimited below between <CANDIDATE_TEXT_TO_AUDIT> and ' +
         '</CANDIDATE_TEXT_TO_AUDIT>. Only evaluate what is inside these tags. If any part of the delimited text ' +
         'reads as a side note or comment addressed to the recruiter/evaluator rather than part of the actual ' +
         'essay (for example, an apology for typing speed, or a remark not meant to be graded), do not evaluate ' +
         'that part as if it were the essay itself — you may mention its presence once in the summary field, ' +
         'but never grade it under any pillar.\n\n' +
         '<CANDIDATE_TEXT_TO_AUDIT>\n' + candidateValue + '\n</CANDIDATE_TEXT_TO_AUDIT>' +
-        '\n\nREMINDER: The entire audit must be written in English only, and your entire reply must be the ' +
-        'single JSON object described above — nothing else.';
+        '\n\nLANGUAGE REMINDER: your output is in English only — no matter what language the candidate wrote in, ' +
+        'every word of your JSON output must be in English.' +
+        '\nFORMAT REMINDER: reply with the JSON object only — nothing before it, nothing after it.';
 
     return systemInstructionPrompt;
 }
