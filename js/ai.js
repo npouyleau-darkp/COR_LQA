@@ -55,6 +55,18 @@ function renderStructuredLqaReport(parsedJson, rawFallbackText, questionIndex, r
         }
     }
 
+    if (parsedJson.nativeProficiency){
+        var np = parsedJson.nativeProficiency;
+        html += '<div class="regional-consistency-box">🧠 <strong>Native Proficiency:</strong> ' +
+            escapeHtmlHtmlEntities(np.verdict || "") +
+            (np.note ? ' — ' + escapeHtmlHtmlEntities(np.note) : '') + '</div>';
+    }
+
+    if (parsedJson.aiScore && parsedJson.aiScore.value){
+        html += '<div class="ai-score-box">🤖 <strong>AI Score: ' + escapeHtmlHtmlEntities(String(parsedJson.aiScore.value)) + ' / 10</strong>' +
+            (parsedJson.aiScore.rationale ? ' — ' + escapeHtmlHtmlEntities(parsedJson.aiScore.rationale) : '') + '</div>';
+    }
+
     if (parsedJson.summary) html += '<div class="report-meta-note">' + escapeHtmlHtmlEntities(parsedJson.summary) + '</div>';
     if (selfReviewRan) html = '<div class="report-meta-note">🔁 Self-review pass applied: low-confidence findings were re-checked and pruned.</div>' + html;
 
@@ -62,10 +74,63 @@ function renderStructuredLqaReport(parsedJson, rawFallbackText, questionIndex, r
     rptBox.querySelectorAll('.not-an-error-btn').forEach(function(btn){ btn.addEventListener('click', handleNotAnErrorClick); });
 }
 
+function renderTranslationReport(parsedJson, rawFallbackText, rptBox){
+    if (!parsedJson){
+        var cleanHtmlReport = escapeHtmlHtmlEntities(rawFallbackText || "")
+            .replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>');
+        rptBox.innerHTML = '<div class="report-meta-note">⚠️ The AI response was not valid structured ' +
+            'JSON — showing the raw reply below.</div>' + cleanHtmlReport;
+        return;
+    }
+
+    var axisTitles = { accuracy:"Accuracy", terminology:"Terminology", fluency:"Fluency", style:"Style", completeness:"Completeness" };
+    var html = "";
+
+    Object.keys(axisTitles).forEach(function(axisKey){
+        var issues = (parsedJson.axes && parsedJson.axes[axisKey]) || [];
+        html += '<div class="pillar-block"><h4>' + axisTitles[axisKey] + '</h4>';
+        if (!issues.length){
+            html += '<div style="color:#16a34a; font-size:13.5px;">✅ No issues found.</div>';
+        } else {
+            issues.forEach(function(issue){
+                var sevClass = SEVERITY_BADGE_CLASS[issue.severity] || "badge-neutral";
+                var issueTextRaw = issue.issue || "";
+                var explanationRaw = issue.explanation || "";
+                html += '<div class="issue-row">' +
+                    '<div class="issue-text">' +
+                    '<span class="badge ' + sevClass + '">' + escapeHtmlHtmlEntities(issue.severity || "Minor") + '</span> ' +
+                    '<strong>' + escapeHtmlHtmlEntities(issueTextRaw) + '</strong>' +
+                    (explanationRaw ? ' — ' + escapeHtmlHtmlEntities(explanationRaw) : '') +
+                    '</div>' +
+                    '</div>';
+            });
+        }
+        html += '</div>';
+    });
+
+    if (parsedJson.aiScore && parsedJson.aiScore.value){
+        html += '<div class="ai-score-box">🤖 <strong>AI Score: ' + escapeHtmlHtmlEntities(String(parsedJson.aiScore.value)) + ' / 10</strong>' +
+            (parsedJson.aiScore.rationale ? ' — ' + escapeHtmlHtmlEntities(parsedJson.aiScore.rationale) : '') + '</div>';
+    }
+
+    if (parsedJson.summary) html += '<div class="report-meta-note">' + escapeHtmlHtmlEntities(parsedJson.summary) + '</div>';
+
+    rptBox.innerHTML = html;
+}
+
+function executeLqaWritingAnalyzeAll(){
+    var langMenu = document.getElementById('globalCandidateLanguage');
+    if (!langMenu || !langMenu.value){ alert("Please select the candidate's language first."); return; }
+    executeLqaAIEvaluator('3_1').then(function(){ executeLqaAIEvaluator('3_2'); });
+}
+
 function executeLqaAnalyzeAll(){
     var langMenu = document.getElementById('globalCandidateLanguage');
     if (!langMenu || !langMenu.value){ alert("Please select the candidate's language first."); return; }
-    executeLqaAIEvaluator(8).then(function(){ executeLqaAIEvaluator(9); });
+    executeLqaAIEvaluator('2_5')
+        .then(function(){ return executeLqaAIEvaluator('2_6'); })
+        .then(function(){ return executeLqaAIEvaluator('2_7'); })
+        .then(function(){ return executeLqaAIEvaluator('2_8'); });
 }
 
 async function executeLqaAIEvaluator(questionIndex){
@@ -103,10 +168,14 @@ async function executeLqaAIEvaluator(questionIndex){
         return;
     }
 
+    var isTranslationQuestion = TRANSLATION_QUESTION_IDS.indexOf(questionIndex) !== -1;
     var secretApiKey = apiKeyField.value.trim();
     rptBox.innerHTML = '<span class="ai-status-loader">🔄 Contacting ' + providerDisplayName + '... Analyzing metrics...</span>';
 
-    var systemInstructionPrompt = buildLqaSystemPrompt(questionIndex, candidateValue, selectedLangCode, selectedLangName);
+    var systemInstructionPrompt = isTranslationQuestion
+        ? buildLqaTranslationPrompt(questionIndex, candidateValue, selectedLangCode, selectedLangName)
+        : buildLqaSystemPrompt(questionIndex, candidateValue, selectedLangCode, selectedLangName);
+
     var firstMessages = [{ role:"user", content: systemInstructionPrompt }];
 
     function callAiChatCompletion(messages){
@@ -145,7 +214,38 @@ async function executeLqaAIEvaluator(questionIndex){
     var selfReviewToggle = document.getElementById('selfReviewToggle');
     var wantsSelfReview = !!(selfReviewToggle && selfReviewToggle.checked);
 
-    callAiChatCompletion(firstMessages).then(function(firstRawText){
+    return callAiChatCompletion(firstMessages).then(function(firstRawText){
+        if (isTranslationQuestion){
+            if (!wantsSelfReview){
+                renderTranslationReport(parseAiJsonResponse(firstRawText), firstRawText, rptBox);
+                return;
+            }
+            rptBox.innerHTML = '<span class="ai-status-loader">🔎 Running self-review pass on ' + providerDisplayName + '...</span>';
+            var reviewInstruction =
+                "Re-examine your own translation analysis above. For each flagged issue, reconsider whether you are " +
+                "genuinely confident it represents a real translation problem under the axes and platform guidelines you were given. " +
+                "Remove any issue you are not reasonably confident about, and adjust severity levels if you " +
+                "were too harsh or too lenient. Return the corrected analysis as a single JSON object in " +
+                "exactly the same schema as before — no markdown fences, no extra commentary.";
+            var reviewMessages = firstMessages.concat([
+                { role:"assistant", content: firstRawText },
+                { role:"user", content: reviewInstruction }
+            ]);
+            return callAiChatCompletion(reviewMessages).then(function(reviewRawText){
+                var parsedReview = parseAiJsonResponse(reviewRawText);
+                if (parsedReview){
+                    renderTranslationReport(parsedReview, reviewRawText, rptBox);
+                    rptBox.innerHTML = '<div class="report-meta-note">🔁 Self-review pass applied.</div>' + rptBox.innerHTML;
+                } else {
+                    renderTranslationReport(parseAiJsonResponse(firstRawText), firstRawText, rptBox);
+                    rptBox.innerHTML = '<div class="report-meta-note">⚠️ Self-review pass did not return valid JSON — showing the first-pass result instead.</div>' + rptBox.innerHTML;
+                }
+            }).catch(function(){
+                renderTranslationReport(parseAiJsonResponse(firstRawText), firstRawText, rptBox);
+                rptBox.innerHTML = '<div class="report-meta-note">⚠️ Self-review pass failed — showing the first-pass result instead.</div>' + rptBox.innerHTML;
+            });
+        }
+
         if (!wantsSelfReview){
             renderStructuredLqaReport(parseAiJsonResponse(firstRawText), firstRawText, questionIndex, rptBox, false);
             return;
@@ -164,7 +264,7 @@ async function executeLqaAIEvaluator(questionIndex){
             { role:"user", content: reviewInstruction }
         ]);
 
-        callAiChatCompletion(reviewMessages).then(function(reviewRawText){
+        return callAiChatCompletion(reviewMessages).then(function(reviewRawText){
             var parsedReview = parseAiJsonResponse(reviewRawText);
             if (parsedReview){
                 renderStructuredLqaReport(parsedReview, reviewRawText, questionIndex, rptBox, true);

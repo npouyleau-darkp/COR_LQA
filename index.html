@@ -105,109 +105,195 @@
         <div class="split-layout">
             <div class="main-content">
 
+                <!-- SECTION A: LQA BUGS -->
+                <div class="section-title">Section A — LQA Bugs</div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 1-2 — Neon Racers (screenshot)</span>
+                    <textarea id="cand_q1_2" rows="3" placeholder="Paste candidate response here..."></textarea>
+                    <textarea id="correction_q1_2" rows="2" placeholder="Correction / Recruiter comments..." style="margin-top:8px;"></textarea>
+                    <textarea id="notes_q1_2" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q1_2" min="1" max="10" class="score-input" placeholder="–">
+                    </div>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 1-3 — Diagnostic Node 3 (screenshot)</span>
+                    <textarea id="cand_q1_3" rows="3" placeholder="Paste candidate response here..."></textarea>
+                    <textarea id="correction_q1_3" rows="2" placeholder="Correction / Recruiter comments..." style="margin-top:8px;"></textarea>
+                    <textarea id="notes_q1_3" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q1_3" min="1" max="10" class="score-input" placeholder="–">
+                    </div>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 1-4 — Stellar Forge (screenshot)</span>
+                    <textarea id="cand_q1_4" rows="3" placeholder="Paste candidate response here..."></textarea>
+                    <textarea id="correction_q1_4" rows="2" placeholder="Correction / Recruiter comments..." style="margin-top:8px;"></textarea>
+                    <textarea id="notes_q1_4" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q1_4" min="1" max="10" class="score-input" placeholder="–">
+                    </div>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 1-5 — CrimeCity Vice (screenshot)</span>
+                    <textarea id="cand_q1_5" rows="3" placeholder="Paste candidate response here..."></textarea>
+                    <textarea id="correction_q1_5" rows="2" placeholder="Correction / Recruiter comments..." style="margin-top:8px;"></textarea>
+                    <textarea id="notes_q1_5" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q1_5" min="1" max="10" class="score-input" placeholder="–">
+                    </div>
+                </div>
+
+                <!-- SECTION B: PROOFREADING / TRANSLATION -->
                 <div class="section-title" style="display:flex; align-items:center; justify-content:space-between; gap:15px;">
-                    <span>Section A: LQA Bugs</span>
-                    <button type="button" class="btn-action btn-diff" onclick="runDiffSection([1,2,3,4])">Run Diff (Q1-Q4)</button>
+                    <span>Section B — Proofreading / Translation</span>
+                    <button type="button" class="btn-action btn-analyze-all" onclick="executeLqaAnalyzeAll()">Analyze All Translations (2-5 to 2-8)</button>
                 </div>
 
                 <div class="grading-card">
-                    <span class="card-header-label">Question 1 (Cat-Fu Bug) - Evaluation Node</span>
-                    <div style="display:flex; flex-direction:column; gap:12px;">
-                        <textarea id="cand_q1" rows="2" placeholder="Paste candidate response string here..."></textarea>
-                        <textarea id="ref_q1" rows="2" placeholder="Paste your correction/reference here..."></textarea>
+                    <span class="card-header-label">Question 2-1 — Proofread Segment Alpha</span>
+                    <textarea id="cand_q2_1" rows="3" placeholder="Paste candidate response here..."></textarea>
+                    <textarea id="correction_q2_1" rows="2" placeholder="Correction / Recruiter comments..." style="margin-top:8px;"></textarea>
+                    <textarea id="notes_q2_1" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q2_1" min="1" max="10" class="score-input" placeholder="–">
                     </div>
-                    <div id="report_q1" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
-                    <textarea id="notes_q1" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
                 </div>
 
                 <div class="grading-card">
-                    <span class="card-header-label">Question 2 (LQA Tycoon Bug) - Evaluation Node</span>
-                    <div style="display:flex; flex-direction:column; gap:12px;">
-                        <textarea id="cand_q2" rows="2" placeholder="Paste candidate response string here..."></textarea>
-                        <textarea id="ref_q2" rows="2" placeholder="Paste your correction/reference here..."></textarea>
+                    <span class="card-header-label">Question 2-2 — Proofread Segment Beta</span>
+                    <textarea id="cand_q2_2" rows="3" placeholder="Paste candidate response here..."></textarea>
+                    <textarea id="correction_q2_2" rows="2" placeholder="Correction / Recruiter comments..." style="margin-top:8px;"></textarea>
+                    <textarea id="notes_q2_2" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q2_2" min="1" max="10" class="score-input" placeholder="–">
                     </div>
-                    <div id="report_q2" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
-                    <textarea id="notes_q2" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
                 </div>
 
                 <div class="grading-card">
-                    <span class="card-header-label">Question 3 (Diagnostic Node 3) - Evaluation Node</span>
-                    <div style="display:flex; flex-direction:column; gap:12px;">
-                        <textarea id="cand_q3" rows="2" placeholder="Paste candidate response string here..."></textarea>
-                        <textarea id="ref_q3" rows="2" placeholder="Paste your correction/reference here..."></textarea>
+                    <span class="card-header-label">Question 2-3 — Proofread Segment Gamma</span>
+                    <textarea id="cand_q2_3" rows="3" placeholder="Paste candidate response here..."></textarea>
+                    <textarea id="correction_q2_3" rows="2" placeholder="Correction / Recruiter comments..." style="margin-top:8px;"></textarea>
+                    <textarea id="notes_q2_3" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q2_3" min="1" max="10" class="score-input" placeholder="–">
                     </div>
-                    <div id="report_q3" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
-                    <textarea id="notes_q3" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
                 </div>
 
                 <div class="grading-card">
-                    <span class="card-header-label">Question 4 (Diagnostic Node 4) - Evaluation Node</span>
-                    <div style="display:flex; flex-direction:column; gap:12px;">
-                        <textarea id="cand_q4" rows="2" placeholder="Paste candidate response string here..."></textarea>
-                        <textarea id="ref_q4" rows="2" placeholder="Paste your correction/reference here..."></textarea>
+                    <span class="card-header-label">Question 2-4 — Proofread Segment Delta</span>
+                    <textarea id="cand_q2_4" rows="3" placeholder="Paste candidate response here..."></textarea>
+                    <textarea id="correction_q2_4" rows="2" placeholder="Correction / Recruiter comments..." style="margin-top:8px;"></textarea>
+                    <textarea id="notes_q2_4" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q2_4" min="1" max="10" class="score-input" placeholder="–">
                     </div>
-                    <div id="report_q4" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
-                    <textarea id="notes_q4" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
-                </div>
-
-                <div class="section-title" style="display:flex; align-items:center; justify-content:space-between; gap:15px;">
-                    <span>Section B: Proofreading / Translation Grading</span>
-                    <button type="button" class="btn-action btn-diff" onclick="runDiffSection([5,6,7])">Run Diff (Q5-Q7)</button>
                 </div>
 
                 <div class="grading-card">
-                    <span class="card-header-label">Question 5 (Segment Alpha) - Evaluation Node</span>
-                    <div style="display:flex; flex-direction:column; gap:12px;">
-                        <textarea id="cand_q5" rows="2" placeholder="Paste candidate response string here..."></textarea>
-                        <textarea id="ref_q5" rows="2" placeholder="Paste your authoritative correct translation string here..."></textarea>
-                    </div>
-                    <div id="report_q5" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
-                    <textarea id="notes_q5" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
-                </div>
-
-                <div class="grading-card">
-                    <span class="card-header-label">Question 6 (Segment Beta) - Evaluation Node</span>
-                    <div style="display:flex; flex-direction:column; gap:12px;">
-                        <textarea id="cand_q6" rows="2" placeholder="Paste candidate response string here..."></textarea>
-                        <textarea id="ref_q6" rows="2" placeholder="Paste your authoritative correct translation string here..."></textarea>
-                    </div>
-                    <div id="report_q6" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
-                    <textarea id="notes_q6" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
-                </div>
-
-                <div class="grading-card">
-                    <span class="card-header-label">Question 7 (Segment Gamma) - Evaluation Node</span>
-                    <div style="display:flex; flex-direction:column; gap:12px;">
-                        <textarea id="cand_q7" rows="2" placeholder="Paste candidate response string here..."></textarea>
-                        <textarea id="ref_q7" rows="2" placeholder="Paste your authoritative correct translation string here..."></textarea>
-                    </div>
-                    <div id="report_q7" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
-                    <textarea id="notes_q7" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
-                </div>
-
-                <div class="section-title" style="display:flex; align-items:center; justify-content:space-between; gap:15px;">
-                    <span>Section C: Writing Skill / Essay Analysis</span>
-                    <button type="button" class="btn-action btn-analyze-all" onclick="executeLqaAnalyzeAll()">Analyze All (8 & 9)</button>
-                </div>
-
-                <div class="grading-card">
-                    <span class="card-header-label">Question 8 (Recent Game Essay - Fixed English Input) - Automated AI Audit Node</span>
-                    <textarea id="cand_q8" rows="4" placeholder="Paste candidate long-form essay response here..."></textarea>
+                    <span class="card-header-label">Question 2-5 — Translation: PlayStation 5 Error Message — AI Evaluation</span>
+                    <div class="source-text-box"><strong>Source (EN):</strong> An error has occurred (CE-108255-1). The game data may be corrupted. Please delete the application and reinstall it from your library. If the issue persists, visit PlayStation Support.</div>
+                    <textarea id="cand_q2_5" rows="3" dir="auto" placeholder="Paste candidate translation here..."></textarea>
                     <div class="action-trigger-row">
-                        <button type="button" class="btn-action btn-ai" onclick="executeLqaAIEvaluator(8)">Analyze Text with AI</button>
+                        <button type="button" class="btn-action btn-ai" onclick="executeLqaAIEvaluator('2_5')">Analyze Translation with AI</button>
                     </div>
-                    <div id="report_q8" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Automated AI grading report empty]</div>
-                    <textarea id="notes_q8" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div id="report_q2_5" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[AI translation grading report empty]</div>
+                    <textarea id="notes_q2_5" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q2_5" min="1" max="10" class="score-input" placeholder="–">
+                    </div>
                 </div>
 
                 <div class="grading-card">
-                    <span class="card-header-label">Question 9 (Proverb / Yoda Analysis - Multi-Language) - Automated AI Audit Node</span>
-                    <textarea id="cand_q9" rows="4" placeholder="Paste candidate long-form essay response here..."></textarea>
+                    <span class="card-header-label">Question 2-6 — Translation: Nintendo eShop Connection Message — AI Evaluation</span>
+                    <div class="source-text-box"><strong>Source (EN):</strong> Unable to connect to Nintendo eShop. Please check your internet connection settings or try again later. Visit support.nintendo.com for assistance. Error Code: 2811-5001.</div>
+                    <textarea id="cand_q2_6" rows="3" dir="auto" placeholder="Paste candidate translation here..."></textarea>
                     <div class="action-trigger-row">
-                        <button type="button" class="btn-action btn-ai" onclick="executeLqaAIEvaluator(9)">Analyze Text with AI</button>
+                        <button type="button" class="btn-action btn-ai" onclick="executeLqaAIEvaluator('2_6')">Analyze Translation with AI</button>
                     </div>
-                    <div id="report_q9" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Automated AI grading report empty]</div>
-                    <textarea id="notes_q9" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div id="report_q2_6" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[AI translation grading report empty]</div>
+                    <textarea id="notes_q2_6" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q2_6" min="1" max="10" class="score-input" placeholder="–">
+                    </div>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 2-7 — Translation: Xbox System Prompt — AI Evaluation</span>
+                    <div class="source-text-box"><strong>Source (EN):</strong> Your controller has been disconnected. Please reconnect your controller and press the A Button to continue. Check the battery level if the issue persists. Error: 0x82D40003.</div>
+                    <textarea id="cand_q2_7" rows="3" dir="auto" placeholder="Paste candidate translation here..."></textarea>
+                    <div class="action-trigger-row">
+                        <button type="button" class="btn-action btn-ai" onclick="executeLqaAIEvaluator('2_7')">Analyze Translation with AI</button>
+                    </div>
+                    <div id="report_q2_7" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[AI translation grading report empty]</div>
+                    <textarea id="notes_q2_7" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q2_7" min="1" max="10" class="score-input" placeholder="–">
+                    </div>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 2-8 — Translation: NBA Commentary Excerpt — AI Evaluation</span>
+                    <div class="source-text-box"><strong>Source (EN):</strong> {player_name} rises up from the top of the key, hangs in the air for a split second, and throws down a thunderous two-handed slam — and the {team_name} crowd goes absolutely wild!</div>
+                    <textarea id="cand_q2_8" rows="3" dir="auto" placeholder="Paste candidate translation here..."></textarea>
+                    <div class="action-trigger-row">
+                        <button type="button" class="btn-action btn-ai" onclick="executeLqaAIEvaluator('2_8')">Analyze Translation with AI</button>
+                    </div>
+                    <div id="report_q2_8" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[AI translation grading report empty]</div>
+                    <textarea id="notes_q2_8" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q2_8" min="1" max="10" class="score-input" placeholder="–">
+                    </div>
+                </div>
+
+                <!-- SECTION C: WRITING SKILL -->
+                <div class="section-title" style="display:flex; align-items:center; justify-content:space-between; gap:15px;">
+                    <span>Section C — Writing Skill / Essay Analysis</span>
+                    <button type="button" class="btn-action btn-analyze-all" onclick="executeLqaWritingAnalyzeAll()">Analyze All (3-1 &amp; 3-2)</button>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 3-1 — Essay in English (150 words) — Automated AI Audit</span>
+                    <textarea id="cand_q3_1" rows="4" placeholder="Paste candidate English essay here..."></textarea>
+                    <div class="action-trigger-row">
+                        <button type="button" class="btn-action btn-ai" onclick="executeLqaAIEvaluator('3_1')">Analyze Text with AI</button>
+                    </div>
+                    <div id="report_q3_1" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Automated AI grading report empty]</div>
+                    <textarea id="notes_q3_1" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q3_1" min="1" max="10" class="score-input" placeholder="–">
+                    </div>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 3-2 — Essay in Target Language (250 words equivalent) — Automated AI Audit</span>
+                    <textarea id="cand_q3_2" rows="4" dir="auto" placeholder="Paste candidate essay in target language here..."></textarea>
+                    <div class="action-trigger-row">
+                        <button type="button" class="btn-action btn-ai" onclick="executeLqaAIEvaluator('3_2')">Analyze Text with AI</button>
+                    </div>
+                    <div id="report_q3_2" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Automated AI grading report empty]</div>
+                    <textarea id="notes_q3_2" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                        <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (1–10)</label>
+                        <input type="number" id="score_q3_2" min="1" max="10" class="score-input" placeholder="–">
+                    </div>
                 </div>
 
             </div>

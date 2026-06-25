@@ -1,5 +1,5 @@
 function getExceptionsLangKey(qi){
-    if (qi === 8) return 'en-US';
+    if (qi === '3_1') return 'en-US';
     var lang = document.getElementById('globalCandidateLanguage');
     return (lang && lang.value) ? lang.value : 'en-US';
 }

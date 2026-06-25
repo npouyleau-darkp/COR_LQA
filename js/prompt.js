@@ -3,12 +3,12 @@ function buildLqaSystemPrompt(questionIndex, candidateValue, selectedLangCode, s
     var nativeProficiencySchemaClause = "";
     var nativeProficiencyInstruction = "";
 
-    if (questionIndex === 8){
+    if (questionIndex === '3_1'){
         promptContextInstruction =
             "The candidate is a non-native speaker writing a long-form essay directly in English. " +
             "Evaluate their text carefully for spelling, vocabulary choices, sentence structure, clarity of expression, logical organization of ideas, and overall fluency. " +
             "Assess whether the candidate can communicate both simple and complex thoughts clearly, accurately, and professionally.";
-    } else if (questionIndex === 9){
+    } else if (questionIndex === '3_2'){
         promptContextInstruction =
             "The candidate is writing their essay in " + selectedLangName + " (" + selectedLangCode + "). " +
             "The candidate is expected to demonstrate native-level written proficiency in this language. " +
@@ -48,7 +48,7 @@ function buildLqaSystemPrompt(questionIndex, candidateValue, selectedLangCode, s
         "Always include a \"regionalConsistency\" field in your JSON response. Set \"applicable\" to false " +
         "and \"note\" to \"Not applicable for this language.\" unless told otherwise below.";
 
-    if (questionIndex === 9){
+    if (questionIndex === '3_2'){
         if (CULTURAL_NUANCE_EXAMPLES[selectedLangCode]){
             culturalNuanceClause = "CULTURAL NUANCE GUIDANCE: " + CULTURAL_NUANCE_EXAMPLES[selectedLangCode] +
                 " Do not flag genuinely acceptable regional or register variation like this as an error.";
@@ -84,12 +84,16 @@ function buildLqaSystemPrompt(questionIndex, candidateValue, selectedLangCode, s
         '"grammar": [...], "fluency": [...], "style": [...]}, ' +
         '"regionalConsistency": {"applicable": true|false, "note": "..."}, ' +
         nativeProficiencySchemaClause +
+        '"aiScore": {"value": 1, "rationale": "..."}, ' +
         '"summary": "..."} ' +
         "Use an empty array for any pillar with no issues, but always include all four pillar keys. " +
         "Severity meanings — Critical: blocks understanding or changes meaning; Major: a clear error a native " +
         "speaker would immediately notice; Minor: a small, nitpick-level issue; Neutral: not actually an error, " +
         "included only as a worth-mentioning observation. Confidence meanings — High: certain this is a genuine " +
-        "issue; Medium: likely an issue but with some doubt; Low: flagging cautiously, could be acceptable variation.";
+        "issue; Medium: likely an issue but with some doubt; Low: flagging cautiously, could be acceptable variation. " +
+        "aiScore.value must be an integer from 1 to 10 reflecting the overall quality of the writing. " +
+        "9-10: native-level, publication-ready; 7-8: good with minor issues; 5-6: acceptable but notable gaps; " +
+        "3-4: insufficient for professional use; 1-2: poor or incomprehensible.";
 
     var systemInstructionPrompt =
         'ABSOLUTE LANGUAGE REQUIREMENT: your entire output must be written in English only — ' +
@@ -124,6 +128,73 @@ function buildLqaSystemPrompt(questionIndex, candidateValue, selectedLangCode, s
         '<CANDIDATE_TEXT_TO_AUDIT>\n' + candidateValue + '\n</CANDIDATE_TEXT_TO_AUDIT>' +
         '\n\nLANGUAGE REMINDER: your output is in English only — no matter what language the candidate wrote in, ' +
         'every word of your JSON output must be in English.' +
+        '\nFORMAT REMINDER: reply with the JSON object only — nothing before it, nothing after it.';
+
+    return systemInstructionPrompt;
+}
+
+function buildLqaTranslationPrompt(questionIndex, candidateValue, selectedLangCode, selectedLangName){
+    var sourceText = TRANSLATION_SOURCES[questionIndex] || '';
+    var platformContext = TRANSLATION_PLATFORM_CONTEXT[questionIndex] || '';
+
+    var jsonSchemaInstruction =
+        "STRICT OUTPUT FORMAT — NON-NEGOTIABLE: your entire reply must be one single valid JSON object. " +
+        "No markdown code fences (no ```json). No preamble. No trailing commentary. " +
+        "Any text outside the JSON object is a format violation. " +
+        "LANGUAGE OF OUTPUT — NON-NEGOTIABLE: every string value inside the JSON (issue, explanation, summary, rationale) " +
+        "must be written in English, regardless of the target language being evaluated. " +
+        "The JSON must exactly match this shape: " +
+        '{"axes": {' +
+        '"accuracy":     [{"issue": "...", "severity": "Critical|Major|Minor|Neutral", "explanation": "..."}], ' +
+        '"terminology":  [...], ' +
+        '"fluency":      [...], ' +
+        '"style":        [...], ' +
+        '"completeness": [...] ' +
+        '}, ' +
+        '"aiScore": {"value": 1, "rationale": "..."}, ' +
+        '"summary": "..."} ' +
+        "Use an empty array for any axis with no issues, but always include all five axis keys. " +
+        "Severity meanings — Critical: fundamentally wrong or changes meaning; Major: clear error a professional translator would not make; Minor: small imprecision; Neutral: observation worth noting, not an actual error. " +
+        "aiScore.value must be an integer from 1 to 10 reflecting the overall professional translation quality. " +
+        "9-10: publication-ready, native-level, fully compliant with platform guidelines; " +
+        "7-8: good translation with minor defects; " +
+        "5-6: acceptable but with notable gaps; " +
+        "3-4: insufficient quality for professional use; " +
+        "1-2: inadequate or incorrect translation.";
+
+    var systemInstructionPrompt =
+        'ABSOLUTE LANGUAGE REQUIREMENT: your entire output must be written in English only — ' +
+        'no matter what target language is being evaluated, every single word of your response must be in English. ' +
+        'This applies to every field, every explanation, and every summary inside the JSON. ' +
+        'Writing any part of your output in the target language is a critical failure. ' +
+        '\n\n' +
+        'You are an authoritative Senior Translation Quality Assessor and localization specialist. ' +
+        'Evaluate the candidate\'s professional translation for Question ' + questionIndex + '. ' +
+        '\n\n' +
+        'TARGET LANGUAGE: ' + selectedLangName + ' (' + selectedLangCode + '). ' +
+        'Evaluate the translation against the standards, conventions, and guidelines applicable to ' + selectedLangName + ' (' + selectedLangCode + '). ' +
+        'Platform-specific terminology, button names, and UI conventions may vary by language — apply the correct localization standard for this language. ' +
+        '\n\n' +
+        'PLATFORM CONTEXT: ' + platformContext + ' ' +
+        '\n\n' +
+        'Evaluate the translation across the following five axes: ' +
+        'ACCURACY: semantic fidelity to the source text — no omissions, no additions, no meaning distortion. ' +
+        'TERMINOLOGY: correct use of platform-specific terms, brand names, and interface conventions for ' + selectedLangName + ' (' + selectedLangCode + '). ' +
+        'Note that controller button names (A, B, X, Y etc.) and system UI labels follow platform-specific localization guidelines that vary per language and publisher. ' +
+        'FLUENCY: naturalness and readability in the target language — the translation should read effortlessly to a native speaker. ' +
+        'STYLE: appropriate register for the context (formal/technical for system messages; energetic/dynamic for sports commentary). ' +
+        'COMPLETENESS: no source elements omitted; variables in {curly braces} such as {player_name} and {team_name} must be preserved verbatim and untranslated. ' +
+        '\n\n' +
+        jsonSchemaInstruction + ' ' +
+        '\n\n' +
+        'The source text (English) is delimited below between <SOURCE_TEXT> and </SOURCE_TEXT>. ' +
+        'The candidate\'s translation is delimited between <CANDIDATE_TRANSLATION> and </CANDIDATE_TRANSLATION>. ' +
+        'Only evaluate the translation against the source — do not evaluate the source itself. ' +
+        '\n\n' +
+        '<SOURCE_TEXT>\n' + sourceText + '\n</SOURCE_TEXT>' +
+        '\n\n' +
+        '<CANDIDATE_TRANSLATION>\n' + candidateValue + '\n</CANDIDATE_TRANSLATION>' +
+        '\n\nLANGUAGE REMINDER: your output is in English only — every word of your JSON output must be in English.' +
         '\nFORMAT REMINDER: reply with the JSON object only — nothing before it, nothing after it.';
 
     return systemInstructionPrompt;

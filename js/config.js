@@ -26,3 +26,20 @@ var REGIONAL_VARIANT_CONTRAST = {
 
 var SEVERITY_BADGE_CLASS = { "Critical":"badge-critical", "Major":"badge-major", "Minor":"badge-minor", "Neutral":"badge-neutral" };
 var CONFIDENCE_BADGE_CLASS = { "High":"badge-conf-high", "Medium":"badge-conf-medium", "Low":"badge-conf-low" };
+
+var TRANSLATION_SOURCES = {
+    '2_5': 'An error has occurred (CE-108255-1). The game data may be corrupted. Please delete the application and reinstall it from your library. If the issue persists, visit PlayStation Support.',
+    '2_6': 'Unable to connect to Nintendo eShop. Please check your internet connection settings or try again later. Visit support.nintendo.com for assistance. Error Code: 2811-5001.',
+    '2_7': 'Your controller has been disconnected. Please reconnect your controller and press the A Button to continue. Check the battery level if the issue persists. Error: 0x82D40003.',
+    '2_8': '{player_name} rises up from the top of the key, hangs in the air for a split second, and throws down a thunderous two-handed slam — and the {team_name} crowd goes absolutely wild!'
+};
+
+var TRANSLATION_PLATFORM_CONTEXT = {
+    '2_5': 'Sony PlayStation 5 system error message. Apply Sony/PlayStation localization compliance guidelines: formal register, no truncation, preserve error code format exactly as-is.',
+    '2_6': 'Nintendo eShop connection message. Apply Nintendo localization standards: natural phrasing, family-friendly tone. Do not literally translate UI button names; follow Nintendo platform conventions per language.',
+    '2_7': 'Xbox system prompt. Apply Microsoft localization guidelines for Xbox: consistent controller button naming per Xbox Terminology (button labels may differ by language per Microsoft guidelines), active voice, concise phrasing.',
+    '2_8': 'NBA basketball live commentary excerpt. Preserve the energy, pace, and technical terminology of US basketball broadcasting. Variables in {curly braces} such as {player_name} and {team_name} must not be translated and must be preserved verbatim.'
+};
+
+var TRANSLATION_QUESTION_IDS = ['2_5', '2_6', '2_7', '2_8'];
+var WRITING_QUESTION_IDS = ['3_1', '3_2'];
