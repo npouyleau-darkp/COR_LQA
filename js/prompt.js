@@ -73,13 +73,22 @@ function buildLqaSystemPrompt(questionIndex, candidateValue, selectedLangCode, s
             savedExceptions.join(", ") + ".";
     }
 
+    // Issue field rule: only for Q3-2, where the candidate writes in a non-English language.
+    // The issue field must follow the same label format as Q3-1 ("Description of problem in 'quoted text'")
+    // but with the candidate's text quoted verbatim in their language using correct typographic quotes.
     var issueFieldRule = questionIndex === '3_2'
-        ? "ISSUE FIELD RULE — NON-NEGOTIABLE: the \"issue\" field must contain the exact word, phrase, or short " +
-          "passage from the candidate's text that contains the problem, quoted verbatim in the candidate's original " +
-          "language and enclosed in the typographically correct quotation marks for that language " +
-          "(e.g. « » for French, „ “ for German, “” for English, 「」 for Japanese, 「」 for Korean, etc.). " +
-          "Never translate, paraphrase, or describe the problem in the issue field — only quote the candidate's " +
-          "actual text. The explanation field is where you describe what is wrong, entirely in English. "
+        ? "ISSUE FIELD RULE — NON-NEGOTIABLE: the \"issue\" field must be a short English label that names " +
+          "the type of error and embeds the candidate's exact problematic word or phrase quoted verbatim in their " +
+          "language, using the typographically correct quotation marks for that language " +
+          "(« » for French, „ “ for German, “ ” for English, " +
+          "「」 for Japanese, 「」 for Korean, etc.). " +
+          "The format must mirror Q3-1 style: [Brief English description] + [verbatim candidate text in correct quotes]. " +
+          "Correct examples: " +
+          "'Missing plural agreement in « des armures brillante »', " +
+          "'Incorrect expression « en faite »', " +
+          "'Subject-verb agreement error in „He fight enemies“'. " +
+          "The verbatim candidate text in the issue field must never be translated or paraphrased. " +
+          "The explanation field is where you explain the problem and correct form, entirely in English. "
         : "";
 
     var langOutputRule = questionIndex === '3_2'
