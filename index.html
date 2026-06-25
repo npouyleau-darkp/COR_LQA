@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LQA Review & Grading Dashboard (Hugging Face Edition)</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<noscript>
+    <div class="noscript-hardlock">
+        <h1>JavaScript Required</h1>
+        <p>Security compliance protocols require JavaScript execution to be active to view this dashboard.</p>
+    </div>
+</noscript>
+
+<div id="mainApplicationWrapper">
+    <div class="container">
+
+        <div class="header-meta" id="headerMeta">
+            <div style="display:flex; align-items:center; gap:15px;">
+                <h1 class="test-title">LQA Review & Grading Dashboard</h1>
+                <button type="button" id="qaResetBtn" onclick="clearDashboardFields()">Clear All Fields</button>
+                <button type="button" class="btn-action btn-teams" onclick="sendToTeamsWebhook()">Send to Teams</button>
+                <button type="button" class="btn-action btn-pdf" onclick="exportDashboardToPdf()">Download PDF</button>
+            </div>
+            <button type="button" class="theme-toggle-btn" id="themeToggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+        </div>
+
+        <div class="administrative-config-panel">
+            <div class="config-row-flex">
+                <span class="config-label-text">🤖 AI Provider:</span>
+                <select id="aiProviderSelect" class="config-select-menu" onchange="updateProviderUI()">
+                    <option value="huggingface">Hugging Face — gpt-oss-120b</option>
+                    <option value="cohere">Cohere — Command A+</option>
+                </select>
+            </div>
+            <div class="config-row-flex" id="hfKeyRow">
+                <span class="config-label-text">🔐 Hugging Face API Token:</span>
+                <input type="password" id="hfApiKey" class="config-input-field" placeholder="Paste your Hugging Face access token here (needs 'Make calls to Inference Providers' permission)...">
+            </div>
+            <div class="config-row-flex" id="cohereKeyRow" style="display:none;">
+                <span class="config-label-text">🔐 Cohere API Token:</span>
+                <input type="password" id="cohereApiKey" class="config-input-field" placeholder="Paste your Cohere trial or production API key here...">
+            </div>
+            <div class="config-row-flex" style="align-items:flex-start;">
+                <span class="config-label-text">🗣️ Language Coverage:</span>
+                <span id="providerLanguageNote" style="font-size:13px; line-height:1.6; color:var(--text-color);"></span>
+            </div>
+            <div class="config-row-flex">
+                <span class="config-label-text">🌍 Candidate Language:</span>
+                <select id="globalCandidateLanguage" class="config-select-menu" onchange="updateLanguageLockState()">
+                    <option value="" disabled selected>— Select Candidate Language —</option>
+                    <option value="fr-FR">French (FR)</option>
+                    <option value="de-DE">German (DE)</option>
+                    <option value="it-IT">Italian (IT)</option>
+                    <option value="nl-NL">Dutch (NL)</option>
+                    <option value="sv-SE">Swedish (SE)</option>
+                    <option value="no-NO">Norwegian (NO)</option>
+                    <option value="da-DK">Danish (DK)</option>
+                    <option value="fi-FI">Finnish (FI)</option>
+                    <option value="es-ES">Spanish (Spain)</option>
+                    <option value="es-419">Spanish (Latin America)</option>
+                    <option value="pt-PT">Portuguese (Portugal)</option>
+                    <option value="pt-BR">Portuguese (Brazil)</option>
+                    <option value="ru-RU">Russian (RU)</option>
+                    <option value="pl-PL">Polish (PL)</option>
+                    <option value="cs-CZ">Czech (CZ)</option>
+                    <option value="hu-HU">Hungarian (HU)</option>
+                    <option value="el-GR">Greek (GR)</option>
+                    <option value="tr-TR">Turkish (TR)</option>
+                    <option value="uk-UA">Ukrainian (UA)</option>
+                    <option value="ro-RO">Romanian (RO)</option>
+                    <option value="bg-BG">Bulgarian (BG)</option>
+                    <option value="ar-AA">Arabic (RTL)</option>
+                    <option value="hi-IN">Hindi (IN)</option>
+                    <option value="zh-CN">Chinese (Simplified)</option>
+                    <option value="zh-TW">Chinese (Traditional - TW)</option>
+                    <option value="zh-HK">Chinese (Traditional - HK)</option>
+                    <option value="ja-JP">Japanese (JP)</option>
+                    <option value="ko-KR">Korean (KR)</option>
+                    <option value="vi-VN">Vietnamese (VN)</option>
+                    <option value="th-TH">Thai (TH)</option>
+                    <option value="ms-MY">Malay (MY)</option>
+                    <option value="id-ID">Indonesian (ID)</option>
+                </select>
+            </div>
+            <div class="config-row-flex" id="langLockWarningRow">
+                <span class="config-label-text"></span>
+                <span class="lang-lock-warning" id="langLockWarning">⚠️ Please select the candidate's language to begin</span>
+            </div>
+            <div class="config-row-flex">
+                <span class="config-label-text">🔁 Self-Review Pass:</span>
+                <label style="display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--text-color);">
+                    <input type="checkbox" id="selfReviewToggle">
+                    Run a second AI pass that re-checks and prunes low-confidence findings (uses 2x quota per analysis)
+                </label>
+            </div>
+            <div class="config-row-flex">
+                <span class="config-label-text">📚 Exceptions Dictionary:</span>
+                <span class="exceptions-tracker" id="exceptionsTracker">No exceptions saved yet for this language.</span>
+            </div>
+        </div>
+
+        <div class="split-layout">
+            <div class="main-content">
+
+                <div class="section-title" style="display:flex; align-items:center; justify-content:space-between; gap:15px;">
+                    <span>Section A: LQA Bugs</span>
+                    <button type="button" class="btn-action btn-diff" onclick="runDiffSection([1,2,3,4])">Run Diff (Q1-Q4)</button>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 1 (Cat-Fu Bug) - Evaluation Node</span>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        <textarea id="cand_q1" rows="2" placeholder="Paste candidate response string here..."></textarea>
+                        <textarea id="ref_q1" rows="2" placeholder="Paste your correction/reference here..."></textarea>
+                    </div>
+                    <div id="report_q1" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
+                    <textarea id="notes_q1" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 2 (LQA Tycoon Bug) - Evaluation Node</span>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        <textarea id="cand_q2" rows="2" placeholder="Paste candidate response string here..."></textarea>
+                        <textarea id="ref_q2" rows="2" placeholder="Paste your correction/reference here..."></textarea>
+                    </div>
+                    <div id="report_q2" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
+                    <textarea id="notes_q2" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 3 (Diagnostic Node 3) - Evaluation Node</span>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        <textarea id="cand_q3" rows="2" placeholder="Paste candidate response string here..."></textarea>
+                        <textarea id="ref_q3" rows="2" placeholder="Paste your correction/reference here..."></textarea>
+                    </div>
+                    <div id="report_q3" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
+                    <textarea id="notes_q3" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 4 (Diagnostic Node 4) - Evaluation Node</span>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        <textarea id="cand_q4" rows="2" placeholder="Paste candidate response string here..."></textarea>
+                        <textarea id="ref_q4" rows="2" placeholder="Paste your correction/reference here..."></textarea>
+                    </div>
+                    <div id="report_q4" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
+                    <textarea id="notes_q4" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                </div>
+
+                <div class="section-title" style="display:flex; align-items:center; justify-content:space-between; gap:15px;">
+                    <span>Section B: Proofreading / Translation Grading</span>
+                    <button type="button" class="btn-action btn-diff" onclick="runDiffSection([5,6,7])">Run Diff (Q5-Q7)</button>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 5 (Segment Alpha) - Evaluation Node</span>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        <textarea id="cand_q5" rows="2" placeholder="Paste candidate response string here..."></textarea>
+                        <textarea id="ref_q5" rows="2" placeholder="Paste your authoritative correct translation string here..."></textarea>
+                    </div>
+                    <div id="report_q5" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
+                    <textarea id="notes_q5" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 6 (Segment Beta) - Evaluation Node</span>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        <textarea id="cand_q6" rows="2" placeholder="Paste candidate response string here..."></textarea>
+                        <textarea id="ref_q6" rows="2" placeholder="Paste your authoritative correct translation string here..."></textarea>
+                    </div>
+                    <div id="report_q6" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
+                    <textarea id="notes_q6" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 7 (Segment Gamma) - Evaluation Node</span>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        <textarea id="cand_q7" rows="2" placeholder="Paste candidate response string here..."></textarea>
+                        <textarea id="ref_q7" rows="2" placeholder="Paste your authoritative correct translation string here..."></textarea>
+                    </div>
+                    <div id="report_q7" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Diff report output container empty]</div>
+                    <textarea id="notes_q7" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                </div>
+
+                <div class="section-title" style="display:flex; align-items:center; justify-content:space-between; gap:15px;">
+                    <span>Section C: Writing Skill / Essay Analysis</span>
+                    <button type="button" class="btn-action btn-analyze-all" onclick="executeLqaAnalyzeAll()">Analyze All (8 & 9)</button>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 8 (Recent Game Essay - Fixed English Input) - Automated AI Audit Node</span>
+                    <textarea id="cand_q8" rows="4" placeholder="Paste candidate long-form essay response here..."></textarea>
+                    <div class="action-trigger-row">
+                        <button type="button" class="btn-action btn-ai" onclick="executeLqaAIEvaluator(8)">Analyze Text with AI</button>
+                    </div>
+                    <div id="report_q8" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Automated AI grading report empty]</div>
+                    <textarea id="notes_q8" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                </div>
+
+                <div class="grading-card">
+                    <span class="card-header-label">Question 9 (Proverb / Yoda Analysis - Multi-Language) - Automated AI Audit Node</span>
+                    <textarea id="cand_q9" rows="4" placeholder="Paste candidate long-form essay response here..."></textarea>
+                    <div class="action-trigger-row">
+                        <button type="button" class="btn-action btn-ai" onclick="executeLqaAIEvaluator(9)">Analyze Text with AI</button>
+                    </div>
+                    <div id="report_q9" class="report-display-box" dir="auto" style="unicode-bidi:plaintext;">[Automated AI grading report empty]</div>
+                    <textarea id="notes_q9" rows="2" placeholder="Recruiter notes..." style="margin-top:8px; font-size:13px;"></textarea>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/diff.js"></script>
+<script src="js/exceptions.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/prompt.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/export.js"></script>
+<script>
+    updateProviderUI();
+    updateLanguageLockState();
+</script>
+</body>
+</html>
