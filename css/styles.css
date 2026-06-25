@@ -69,7 +69,12 @@ textarea:focus { border-color:#2563eb; outline:none; }
 .exceptions-tracker button { font-size:11px; padding:3px 8px; border-radius:5px; border:1px solid var(--border-color); background:var(--container-bg); color:var(--text-color); cursor:pointer; margin-left:8px; }
 .source-text-box { margin-bottom:10px; padding:12px 16px; border-radius:6px; border:1px solid #93c5fd; background-color:#eff6ff; font-size:13.5px; line-height:1.6; color:#1e3a8a; white-space:pre-wrap; word-break:break-word; }
 .dark-mode .source-text-box { background-color:#1e3a5f; border-color:#3b82f6; color:#bfdbfe; }
-.score-input { width:80px; padding:6px 10px; border:1px solid var(--border-color); border-radius:6px; background-color:var(--input-bg); color:var(--title-color); font-size:14px; text-align:center; }
-.score-input:focus { border-color:#2563eb; outline:none; }
+.score-input { display:none; }
+.score-picker { display:flex; align-items:center; gap:5px; flex-wrap:wrap; }
+.score-dot { width:24px; height:24px; border-radius:50%; border:2px solid var(--border-color); background:var(--input-bg); cursor:pointer; font-size:10px; font-weight:700; color:var(--text-color); display:flex; align-items:center; justify-content:center; transition:background .15s,border-color .15s,color .15s; user-select:none; }
+.score-dot:hover { border-color:#2563eb; background:#dbeafe; color:#1e40af; }
+.score-dot.selected { background:#2563eb; border-color:#2563eb; color:#fff; }
+.score-dot[data-v="0"].selected { background:#94a3b8; border-color:#94a3b8; color:#fff; }
+.score-value-display { font-size:20px; font-weight:800; min-width:32px; text-align:center; color:var(--title-color); margin-left:10px; }
 .ai-score-box { margin-top:12px; padding:10px 14px; border-radius:6px; background-color:#f0fdf4; border:1px solid #86efac; font-size:13.5px; color:#14532d; }
 .dark-mode .ai-score-box { background-color:#052e16; border-color:#4ade80; color:#bbf7d0; }

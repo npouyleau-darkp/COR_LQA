@@ -73,20 +73,29 @@ function buildLqaSystemPrompt(questionIndex, candidateValue, selectedLangCode, s
             savedExceptions.join(", ") + ".";
     }
 
+    var issueFieldRule = questionIndex === '3_2'
+        ? "ISSUE FIELD RULE — NON-NEGOTIABLE: the \"issue\" field must contain the exact word, phrase, or short " +
+          "passage from the candidate's text that contains the problem, quoted verbatim in the candidate's original " +
+          "language and enclosed in the typographically correct quotation marks for that language " +
+          "(e.g. « » for French, „ “ for German, “” for English, 「」 for Japanese, 「」 for Korean, etc.). " +
+          "Never translate, paraphrase, or describe the problem in the issue field — only quote the candidate's " +
+          "actual text. The explanation field is where you describe what is wrong, entirely in English. "
+        : "";
+
+    var langOutputRule = questionIndex === '3_2'
+        ? "LANGUAGE OF OUTPUT — NON-NEGOTIABLE: the explanation, note, summary, verdict, and rationale fields " +
+          "must be written in English, regardless of the language the candidate wrote in. "
+        : "LANGUAGE OF OUTPUT — NON-NEGOTIABLE: every string value inside the JSON (issue, explanation, note, summary, verdict) " +
+          "must be written in English, regardless of the language the candidate wrote in. ";
+
     var jsonSchemaInstruction =
         "STRICT OUTPUT FORMAT — NON-NEGOTIABLE: your entire reply must be one single valid JSON object. " +
         "No markdown code fences (no ```json). No preamble. No trailing commentary. " +
         "Any text outside the JSON object is a format violation. " +
-        "LANGUAGE OF OUTPUT — NON-NEGOTIABLE: the explanation, note, summary, verdict, and rationale fields " +
-        "must be written in English, regardless of the language the candidate wrote in. " +
-        "ISSUE FIELD RULE — NON-NEGOTIABLE: the \"issue\" field must contain the exact word, phrase, or short " +
-        "passage from the candidate's text that contains the problem, quoted verbatim in the candidate's original " +
-        "language and enclosed in the typographically correct quotation marks for that language " +
-        "(e.g. « » for French, „ " for German, " " for English, 「 」 for Japanese, 「 」 for Korean, etc.). " +
-        "Never translate, paraphrase, or describe the problem in the issue field — only quote the candidate's " +
-        "actual text. The explanation field is where you describe what is wrong, entirely in English. " +
+        langOutputRule +
+        issueFieldRule +
         "The JSON must exactly match this shape: " +
-        '{"pillars": {"spelling": [{"issue": "exact quoted candidate text in original language", "severity": "Critical|Major|Minor|Neutral", "confidence": "High|Medium|Low", "explanation": "English explanation of the problem"}], ' +
+        '{"pillars": {"spelling": [{"issue": "...", "severity": "Critical|Major|Minor|Neutral", "confidence": "High|Medium|Low", "explanation": "..."}], ' +
         '"grammar": [...], "fluency": [...], "style": [...]}, ' +
         '"regionalConsistency": {"applicable": true|false, "note": "..."}, ' +
         nativeProficiencySchemaClause +
@@ -147,17 +156,11 @@ function buildLqaTranslationPrompt(questionIndex, candidateValue, selectedLangCo
         "STRICT OUTPUT FORMAT — NON-NEGOTIABLE: your entire reply must be one single valid JSON object. " +
         "No markdown code fences (no ```json). No preamble. No trailing commentary. " +
         "Any text outside the JSON object is a format violation. " +
-        "LANGUAGE OF OUTPUT — NON-NEGOTIABLE: the explanation, summary, and rationale fields must be written " +
-        "in English, regardless of the target language being evaluated. " +
-        "ISSUE FIELD RULE — NON-NEGOTIABLE: the \"issue\" field must contain the exact word, phrase, or short " +
-        "passage from the candidate's translation that contains the problem, quoted verbatim in the target " +
-        "language and enclosed in the typographically correct quotation marks for that language " +
-        "(e.g. « » for French, „ " for German, " " for English, 「 」 for Japanese, etc.). " +
-        "Never translate, paraphrase, or describe the problem in the issue field — only quote the candidate's " +
-        "actual translated text. The explanation field is where you describe what is wrong, entirely in English. " +
+        "LANGUAGE OF OUTPUT — NON-NEGOTIABLE: every string value inside the JSON (issue, explanation, summary, rationale) " +
+        "must be written in English, regardless of the target language being evaluated. " +
         "The JSON must exactly match this shape: " +
         '{"axes": {' +
-        '"accuracy":     [{"issue": "exact quoted candidate text in target language", "severity": "Critical|Major|Minor|Neutral", "explanation": "English explanation"}], ' +
+        '"accuracy":     [{"issue": "...", "severity": "Critical|Major|Minor|Neutral", "explanation": "..."}], ' +
         '"terminology":  [...], ' +
         '"fluency":      [...], ' +
         '"style":        [...], ' +

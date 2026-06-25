@@ -27,6 +27,46 @@ function updateLanguageLockState(){
     refreshExceptionsTracker();
 }
 
+function initScorePickers(){
+    document.querySelectorAll('input.score-input').forEach(function(input){
+        var row = input.parentNode;
+        var picker = document.createElement('div');
+        picker.className = 'score-picker';
+        var display = document.createElement('span');
+        display.className = 'score-value-display';
+        display.textContent = '—';
+
+        for (var v = 0; v <= 10; v++){
+            (function(val){
+                var dot = document.createElement('div');
+                dot.className = 'score-dot';
+                dot.setAttribute('data-v', val);
+                dot.textContent = val;
+                dot.title = val + ' / 10';
+                dot.addEventListener('click', function(){
+                    picker.querySelectorAll('.score-dot').forEach(function(d){ d.classList.remove('selected'); });
+                    dot.classList.add('selected');
+                    input.value = val;
+                    display.textContent = val;
+                });
+                picker.appendChild(dot);
+            })(v);
+        }
+
+        input._pickerRef = picker;
+        input._displayRef = display;
+        row.insertBefore(picker, input);
+        row.insertBefore(display, input);
+    });
+}
+
+function resetScorePicker(input){
+    if (!input) return;
+    input.value = '';
+    if (input._pickerRef) input._pickerRef.querySelectorAll('.score-dot').forEach(function(d){ d.classList.remove('selected'); });
+    if (input._displayRef) input._displayRef.textContent = '—';
+}
+
 function clearDashboardFields(){
     if (!confirm("Are you sure you want to clear all data text fields in this grading dashboard?")) return;
     var allIds = ['1_2','1_3','1_4','1_5','2_1','2_2','2_3','2_4','2_5','2_6','2_7','2_8','3_1','3_2'];
@@ -40,7 +80,7 @@ function clearDashboardFields(){
         var score = document.getElementById('score_q' + id);
         if (cand) cand.value = "";
         if (notes) notes.value = "";
-        if (score) score.value = "";
+        resetScorePicker(score);
     });
     correctionIds.forEach(function(id){
         var corr = document.getElementById('correction_q' + id);
