@@ -55,11 +55,30 @@ function renderStructuredLqaReport(parsedJson, rawFallbackText, questionIndex, r
         }
     }
 
-    if (parsedJson.nativeProficiency){
+    if (parsedJson.proficiencyLevel){
+        var pl = parsedJson.proficiencyLevel;
+        html += '<div class="regional-consistency-box">🎓 <strong>Proficiency Level:</strong> ' +
+            escapeHtmlHtmlEntities(pl.scale || "") + ' — Level ' + escapeHtmlHtmlEntities(String(pl.level || "")) +
+            (pl.code ? ' [' + escapeHtmlHtmlEntities(pl.code) + ']' : '') +
+            (pl.rationale ? ' — ' + escapeHtmlHtmlEntities(pl.rationale) : '') + '</div>';
+    } else if (parsedJson.nativeProficiency){
         var np = parsedJson.nativeProficiency;
         html += '<div class="regional-consistency-box">🧠 <strong>Native Proficiency:</strong> ' +
             escapeHtmlHtmlEntities(np.verdict || "") +
             (np.note ? ' — ' + escapeHtmlHtmlEntities(np.note) : '') + '</div>';
+    }
+
+    if (parsedJson.scoreBreakdown){
+        var sb = parsedJson.scoreBreakdown;
+        var pillars = ['grammar','spelling','fluency','style'];
+        var labels  = { grammar:'Grammar', spelling:'Spelling', fluency:'Fluency', style:'Style' };
+        var weights = { grammar:'40%', spelling:'25%', fluency:'20%', style:'15%' };
+        html += '<div class="report-meta-note"><strong>Score Breakdown:</strong> ';
+        html += pillars.map(function(p){
+            var sub = sb[p] ? escapeHtmlHtmlEntities(String(sb[p].subscore)) : '—';
+            return labels[p] + ' ' + sub + '/10 (' + weights[p] + ')';
+        }).join(' · ');
+        html += '</div>';
     }
 
     if (parsedJson.aiScore && parsedJson.aiScore.value){
@@ -93,12 +112,14 @@ function renderTranslationReport(parsedJson, rawFallbackText, rptBox){
             html += '<div style="color:#16a34a; font-size:13.5px;">✅ No issues found.</div>';
         } else {
             issues.forEach(function(issue){
-                var sevClass = SEVERITY_BADGE_CLASS[issue.severity] || "badge-neutral";
-                var issueTextRaw = issue.issue || "";
+                var sevClass  = SEVERITY_BADGE_CLASS[issue.severity]   || "badge-neutral";
+                var confClass = CONFIDENCE_BADGE_CLASS[issue.confidence] || "badge-conf-medium";
+                var issueTextRaw  = issue.issue       || "";
                 var explanationRaw = issue.explanation || "";
                 html += '<div class="issue-row">' +
                     '<div class="issue-text">' +
-                    '<span class="badge ' + sevClass + '">' + escapeHtmlHtmlEntities(issue.severity || "Minor") + '</span> ' +
+                    '<span class="badge ' + sevClass + '">' + escapeHtmlHtmlEntities(issue.severity || "Minor") + '</span>' +
+                    '<span class="badge ' + confClass + '">' + escapeHtmlHtmlEntities(issue.confidence || "Medium") + ' confidence</span><br>' +
                     '<strong>' + escapeHtmlHtmlEntities(issueTextRaw) + '</strong>' +
                     (explanationRaw ? ' — ' + escapeHtmlHtmlEntities(explanationRaw) : '') +
                     '</div>' +
@@ -107,6 +128,26 @@ function renderTranslationReport(parsedJson, rawFallbackText, rptBox){
         }
         html += '</div>';
     });
+
+    if (parsedJson.regionalCoherence){
+        var rc = parsedJson.regionalCoherence;
+        if (rc.applicable){
+            var consistency = rc.consistency || "";
+            var region = rc.detectedRegion || "UNCERTAIN";
+            var rcIcon = consistency === 'Confirmed' ? '✅' : consistency === 'Mixed' ? '⚠️' : '❌';
+            html += '<div class="regional-consistency-box">' + rcIcon + ' <strong>Regional Coherence:</strong> ' +
+                escapeHtmlHtmlEntities(region) + ' — ' + escapeHtmlHtmlEntities(consistency);
+            if (rc.issues && rc.issues.length){
+                html += '<ul style="margin:4px 0 0 16px">';
+                rc.issues.forEach(function(i){ html += '<li>' + escapeHtmlHtmlEntities(i.note || "") + '</li>'; });
+                html += '</ul>';
+            }
+            html += '</div>';
+        } else {
+            html += '<div class="report-meta-note">Regional coherence: ' +
+                escapeHtmlHtmlEntities(rc.detectedRegion || "N/A") + '</div>';
+        }
+    }
 
     if (parsedJson.aiScore && parsedJson.aiScore.value){
         html += '<div class="ai-score-box">🤖 <strong>AI Score: ' + escapeHtmlHtmlEntities(String(parsedJson.aiScore.value)) + ' / 10</strong>' +
