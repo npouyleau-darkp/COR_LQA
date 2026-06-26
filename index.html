@@ -36,17 +36,13 @@
                     <option value="gemini">Google Gemini — 2.5 Flash (free)</option>
                 </select>
             </div>
-            <div class="config-row-flex" id="hfKeyRow">
-                <span class="config-label-text">🔐 Hugging Face API Token:</span>
-                <input type="password" id="hfApiKey" class="config-input-field" placeholder="Paste your Hugging Face access token here (needs 'Make calls to Inference Providers' permission)...">
-            </div>
-            <div class="config-row-flex" id="cohereKeyRow" style="display:none;">
-                <span class="config-label-text">🔐 Cohere API Token:</span>
-                <input type="password" id="cohereApiKey" class="config-input-field" placeholder="Paste your Cohere trial or production API key here...">
-            </div>
-            <div class="config-row-flex" id="geminiKeyRow" style="display:none;">
-                <span class="config-label-text">🔐 Gemini API Key:</span>
-                <input type="password" id="geminiApiKey" class="config-input-field" placeholder="Paste your Google AI Studio API key here (free tier — get it at ai.google.dev)...">
+            <div class="config-row-flex">
+                <span class="config-label-text">🔐 API Key:</span>
+                <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
+                    <input type="password" id="hfApiKey" class="config-input-field" placeholder="Paste your Hugging Face access token here (needs 'Make calls to Inference Providers' permission)...">
+                    <input type="password" id="cohereApiKey" class="config-input-field" style="display:none;" placeholder="Paste your Cohere trial or production API key here...">
+                    <input type="password" id="geminiApiKey" class="config-input-field" style="display:none;" placeholder="Paste your Google AI Studio API key here (free tier — get it at ai.google.dev)...">
+                </div>
             </div>
             <div class="config-row-flex" style="align-items:flex-start;">
                 <span class="config-label-text">🗣️ Language Coverage:</span>
@@ -164,10 +160,7 @@
                 </div>
 
                 <!-- SECTION B: PROOFREADING / TRANSLATION -->
-                <div class="section-title" style="display:flex; align-items:center; justify-content:space-between; gap:15px;">
-                    <span>Section B — Proofreading / Translation</span>
-                    <button type="button" class="btn-action btn-analyze-all" onclick="executeLqaAnalyzeAll()">Analyze All Translations (2-5 to 2-8)</button>
-                </div>
+                <div class="section-title">Section B — Proofreading / Translation</div>
 
                 <div class="grading-card">
                     <span class="card-header-label">Question 2-1 — Proofread Segment Alpha</span>
@@ -211,6 +204,10 @@
                         <label style="font-size:13px; font-weight:600; color:var(--title-color);">Score (0–10)</label>
                         <input type="number" id="score_q2_4" min="0" max="10" class="score-input" placeholder="–">
                     </div>
+                </div>
+
+                <div style="display:flex; justify-content:flex-end; margin-bottom:8px;">
+                    <button type="button" class="btn-action btn-analyze-all" onclick="executeLqaAnalyzeAll()">Analyze All Translations (2-5 to 2-8)</button>
                 </div>
 
                 <div class="grading-card">

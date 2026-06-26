@@ -6,18 +6,18 @@ function toggleDarkMode(){
 
 function updateProviderUI(){
     var p = document.getElementById(‘aiProviderSelect’);
-    var hf = document.getElementById(‘hfKeyRow’), co = document.getElementById(‘cohereKeyRow’), ge = document.getElementById(‘geminiKeyRow’);
+    var hf = document.getElementById(‘hfApiKey’), co = document.getElementById(‘cohereApiKey’), ge = document.getElementById(‘geminiApiKey’);
     var note = document.getElementById(‘providerLanguageNote’);
     if (!p || !hf || !co || !ge || !note) return;
     hf.style.display = ‘none’; co.style.display = ‘none’; ge.style.display = ‘none’;
     if (p.value === ‘cohere’){
-        co.style.display = ‘flex’;
-        note.innerHTML = ‘✅ <strong>Strong across all 32 languages in the dropdown above</strong> — Cohere’s Command A+ officially lists 48 supported languages, including dedicated work on Arabic dialects and non-European languages. Still spot-check uncommon scripts since this model is new.’;
+        co.style.display = ‘block’;
+        note.innerHTML = ‘✅ <strong>Strong across all 32 languages in the dropdown above</strong> — Cohere\’s Command A+ officially lists 48 supported languages, including dedicated work on Arabic dialects and non-European languages. Still spot-check uncommon scripts since this model is new.’;
     } else if (p.value === ‘gemini’){
-        ge.style.display = ‘flex’;
+        ge.style.display = ‘block’;
         note.innerHTML = ‘✅ <strong>Excellent multilingual coverage</strong> — Gemini 2.5 Flash handles European, Asian, and Middle Eastern languages well. Free tier (1,500 req/day). Data privacy protected under EEA rules even on the free tier.’;
     } else {
-        hf.style.display = ‘flex’;
+        hf.style.display = ‘block’;
         note.innerHTML = ‘✅ <strong>Solid:</strong> French, Spanish, German, Italian, Portuguese, Dutch and most other Western European languages. ⚠️ <strong>Documented weak spots:</strong> Chinese and Arabic. Have a human double-check those languages, or switch to Cohere above.’;
     }
 }
