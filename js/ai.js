@@ -143,6 +143,9 @@ async function executeLqaAIEvaluator(questionIndex){
         restEndpointUrl = "https://api.cohere.ai/compatibility/v1/chat/completions";
         targetModelId = "command-a-plus-05-2026";
         providerDisplayName = "Cohere";
+    } else if (selectedProvider === 'gemini'){
+        apiKeyField = document.getElementById('geminiApiKey');
+        providerDisplayName = "Gemini";
     } else {
         apiKeyField = document.getElementById('hfApiKey');
         restEndpointUrl = "https://router.huggingface.co/v1/chat/completions";
@@ -179,6 +182,9 @@ async function executeLqaAIEvaluator(questionIndex){
     var firstMessages = [{ role:"user", content: systemInstructionPrompt }];
 
     function callAiChatCompletion(messages){
+        if (selectedProvider === 'gemini'){
+            return callGeminiCompletion(messages);
+        }
         return new Promise(function(resolve, reject){
             var retryCount = 0;
             var maxRetries = 4;
@@ -208,6 +214,31 @@ async function executeLqaAIEvaluator(questionIndex){
                 }).catch(reject);
             }
             attempt();
+        });
+    }
+
+    function callGeminiCompletion(messages){
+        return new Promise(function(resolve, reject){
+            var geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + secretApiKey;
+            var contents = messages.map(function(m){
+                return { role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] };
+            });
+            fetch(geminiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: contents })
+            }).then(function(networkResponse){
+                if (!networkResponse.ok){ reject(new Error('Network error. Status code: ' + networkResponse.status)); return; }
+                networkResponse.json().then(function(parsedJsonData){
+                    var generatedText = "";
+                    if (parsedJsonData && parsedJsonData.candidates && parsedJsonData.candidates[0] &&
+                        parsedJsonData.candidates[0].content && parsedJsonData.candidates[0].content.parts){
+                        generatedText = parsedJsonData.candidates[0].content.parts[0].text || "";
+                    }
+                    if (generatedText) resolve(generatedText);
+                    else reject(new Error('Received an empty response from Gemini.'));
+                }).catch(reject);
+            }).catch(reject);
         });
     }
 

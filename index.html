@@ -33,6 +33,7 @@
                 <select id="aiProviderSelect" class="config-select-menu" onchange="updateProviderUI()">
                     <option value="huggingface">Hugging Face — gpt-oss-120b</option>
                     <option value="cohere">Cohere — Command A+</option>
+                    <option value="gemini">Google Gemini — 2.5 Flash (free)</option>
                 </select>
             </div>
             <div class="config-row-flex" id="hfKeyRow">
@@ -42,6 +43,10 @@
             <div class="config-row-flex" id="cohereKeyRow" style="display:none;">
                 <span class="config-label-text">🔐 Cohere API Token:</span>
                 <input type="password" id="cohereApiKey" class="config-input-field" placeholder="Paste your Cohere trial or production API key here...">
+            </div>
+            <div class="config-row-flex" id="geminiKeyRow" style="display:none;">
+                <span class="config-label-text">🔐 Gemini API Key:</span>
+                <input type="password" id="geminiApiKey" class="config-input-field" placeholder="Paste your Google AI Studio API key here (free tier — get it at ai.google.dev)...">
             </div>
             <div class="config-row-flex" style="align-items:flex-start;">
                 <span class="config-label-text">🗣️ Language Coverage:</span>
