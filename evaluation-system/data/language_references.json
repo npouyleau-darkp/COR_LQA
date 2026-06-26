@@ -1,0 +1,446 @@
+{
+  "_meta": {
+    "description": "Proficiency reference scales for all 32 candidate languages. Levels 1-5 map consistently across all scales.",
+    "scoring_map": {
+      "5": "AI subscore 9-10",
+      "4": "AI subscore 7-8",
+      "3": "AI subscore 6-7",
+      "2": "AI subscore 4-5",
+      "1": "AI subscore 1-3"
+    },
+    "cefr_authority": "Council of Europe — coe.int/en/web/common-european-framework-reference-languages (free)"
+  },
+
+  "fr-FR": {
+    "name": "French (France)",
+    "reference": "CEFR",
+    "authority": "Council of Europe",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use familiar everyday expressions; can handle simple personal transactions with repetition and slow speech." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text on familiar topics; can describe experiences and briefly give reasons or explanations." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently with native speakers on a wide range of topics; can produce clear, detailed text with some complexity." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently and spontaneously without obvious searching; uses language flexibly and effectively for professional purposes." },
+      "5": { "code": "C2",    "descriptor": "Can understand virtually everything heard or read; expresses spontaneously, very fluently and precisely, conveying finer shades of meaning." }
+    }
+  },
+
+  "de-DE": {
+    "name": "German (Germany)",
+    "reference": "CEFR",
+    "authority": "Council of Europe",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use familiar everyday expressions; can handle simple personal transactions with repetition." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text on familiar topics; can describe experiences and briefly give reasons." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently on a wide range of topics; can produce clear, detailed text on a wide range of subjects." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently and spontaneously; uses language flexibly and effectively for social, academic and professional purposes." },
+      "5": { "code": "C2",    "descriptor": "Can understand virtually everything with ease; expresses spontaneously, very fluently and precisely." }
+    }
+  },
+
+  "it-IT": {
+    "name": "Italian (Italy)",
+    "reference": "CEFR",
+    "authority": "Council of Europe",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use familiar everyday expressions; handles basic transactions." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text; can describe experiences and give brief reasons." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently; can produce clear, detailed text on a wide range of subjects." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently and spontaneously; uses language flexibly for professional purposes." },
+      "5": { "code": "C2",    "descriptor": "Can understand virtually everything; expresses spontaneously, very fluently and precisely." }
+    }
+  },
+
+  "nl-NL": {
+    "name": "Dutch (Netherlands)",
+    "reference": "CEFR",
+    "authority": "Council of Europe",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use familiar everyday expressions; handles basic transactions." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text; can describe experiences and give brief reasons." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently; produces clear, detailed text on diverse subjects." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently and spontaneously; flexible, effective professional use." },
+      "5": { "code": "C2",    "descriptor": "Virtually everything understood; expresses spontaneously, very fluently and precisely." }
+    }
+  },
+
+  "sv-SE": {
+    "name": "Swedish (Sweden)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / Swedex",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Swedish for immediate needs; handles simple transactions." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text on familiar topics; handles most everyday situations." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently on a wide range of topics; produces clear, detailed Swedish text." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently and spontaneously; uses Swedish flexibly for professional purposes." },
+      "5": { "code": "C2",    "descriptor": "Virtually everything understood; expresses spontaneously, very fluently and precisely in Swedish." }
+    }
+  },
+
+  "no-NO": {
+    "name": "Norwegian (Norway)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / Norskprøven",
+    "note": "Default is Bokmål (nb). Nynorsk (nn) is a distinct written standard — mixing is an error.",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Norwegian for immediate needs; handles simple transactions." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text; handles most everyday situations in Norwegian." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently; produces clear, detailed Norwegian text on a wide range of subjects." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently; uses Norwegian flexibly for professional purposes." },
+      "5": { "code": "C2",    "descriptor": "Virtually everything understood; expresses spontaneously, very fluently and precisely in Norwegian." }
+    }
+  },
+
+  "da-DK": {
+    "name": "Danish (Denmark)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / Prøve i Dansk",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Danish; handles simple everyday transactions." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text; handles most everyday situations in Danish." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently; produces clear, detailed Danish text on a wide range of subjects." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently; uses Danish flexibly for professional purposes." },
+      "5": { "code": "C2",    "descriptor": "Virtually everything understood; expresses spontaneously, very fluently and precisely in Danish." }
+    }
+  },
+
+  "fi-FI": {
+    "name": "Finnish (Finland)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / YKI (Yleinen kielitutkinto)",
+    "note": "Finnish has no grammatical gender but requires vowel harmony and complex case system. YKI maps directly to CEFR levels.",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Finnish expressions; handles simple routine transactions." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected Finnish text; handles most everyday situations including case variation." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently in Finnish on a wide range of topics; handles complex case structures." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently in Finnish; flexible, effective professional use including complex inflection." },
+      "5": { "code": "C2",    "descriptor": "Mastery of Finnish including idiomatic constructions, dialectal awareness, and complex morphology." }
+    }
+  },
+
+  "es-ES": {
+    "name": "Spanish (Spain / Peninsular)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / Instituto Cervantes DELE",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Spanish for immediate needs; handles simple transactions." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text; handles most everyday situations in Peninsular Spanish." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently; produces clear, detailed text; handles subjunctive and complex syntax." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently and spontaneously; uses Spanish flexibly for professional purposes." },
+      "5": { "code": "C2",    "descriptor": "Virtually everything understood; expresses spontaneously, very fluently and precisely in Spanish." }
+    }
+  },
+
+  "es-419": {
+    "name": "Spanish (Latin America — generic)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / Instituto Cervantes DELE",
+    "note": "Single code covering all Latin American variants. Sub-variant (es-MX, es-AR, es-CO, es-CL, etc.) unknown unless briefed. Flag regional marker mixing.",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Spanish for immediate needs; handles simple transactions." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text; handles most everyday situations in Spanish." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently; produces clear, detailed text on a wide range of subjects." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently and spontaneously; uses Spanish flexibly for professional purposes." },
+      "5": { "code": "C2",    "descriptor": "Virtually everything understood; expresses spontaneously, very fluently and precisely." }
+    }
+  },
+
+  "pt-PT": {
+    "name": "Portuguese (Portugal / European)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / Universidade de Lisboa CAPLE",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic European Portuguese for immediate needs." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text in European Portuguese; handles most everyday situations." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently in PT-PT; produces clear, detailed text using European conventions." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently in PT-PT; flexible, effective professional use." },
+      "5": { "code": "C2",    "descriptor": "Mastery of European Portuguese; native-like command including regional register awareness." }
+    }
+  },
+
+  "pt-BR": {
+    "name": "Portuguese (Brazil)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / Celpe-Bras (MEC Brasil)",
+    "note": "Celpe-Bras uses its own grading internally; CEFR equivalence is internationally recognized for PT-BR assessment.",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Brazilian Portuguese for immediate needs." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text in Brazilian Portuguese; handles most everyday situations." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently in PT-BR; produces clear, detailed text using Brazilian conventions." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently in PT-BR; flexible, effective professional use." },
+      "5": { "code": "C2",    "descriptor": "Mastery of Brazilian Portuguese; native-like command including regional and cultural nuance." }
+    }
+  },
+
+  "ru-RU": {
+    "name": "Russian (Russia)",
+    "reference": "TORFL",
+    "authority": "Ministry of Education of Russia — torfl.ru (free descriptor access)",
+    "note": "TORFL (ТРКИ) levels map to CEFR: Elementary=A2, Basic=B1, TRKI-1=B2, TRKI-2=C1, TRKI-3/4=C2.",
+    "levels": {
+      "1": { "code": "Elementary (A1/A2)", "descriptor": "Can understand and use basic Russian for immediate needs; handles simple routine situations." },
+      "2": { "code": "Basic (B1)",         "descriptor": "Can produce simple connected text in Russian; handles most everyday situations." },
+      "3": { "code": "TRKI-1 (B2)",        "descriptor": "Can interact fluently; understands complex texts on concrete and abstract topics." },
+      "4": { "code": "TRKI-2 (C1)",        "descriptor": "Can express ideas fluently and spontaneously; effective professional use of Russian." },
+      "5": { "code": "TRKI-3/4 (C2)",      "descriptor": "Near-native command of Russian; understands and produces complex texts on any topic." }
+    }
+  },
+
+  "pl-PL": {
+    "name": "Polish (Poland)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / State Commission for Certification of Proficiency in Polish",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Polish for immediate needs; handles simple transactions." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected Polish text; handles most everyday situations." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently in Polish; produces clear, detailed text on a wide range of subjects." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently in Polish; flexible, effective professional use." },
+      "5": { "code": "C2",    "descriptor": "Mastery of Polish; native-like command including complex case and aspect usage." }
+    }
+  },
+
+  "cs-CZ": {
+    "name": "Czech (Czech Republic)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / Charles University CCE",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Czech for immediate needs." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text in Czech; handles most everyday situations." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently in Czech; produces clear, detailed text on a wide range of subjects." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently in Czech; flexible, effective professional use." },
+      "5": { "code": "C2",    "descriptor": "Mastery of Czech; native-like command including complex morphology and aspect." }
+    }
+  },
+
+  "hu-HU": {
+    "name": "Hungarian (Hungary)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / ECL International (CEFR-aligned)",
+    "note": "Hungarian uses ECL and ORIGO exams, both CEFR-aligned. Agglutinative morphology means errors are highly specific.",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Hungarian for immediate needs; handles simple transactions." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text in Hungarian; handles most everyday situations." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently in Hungarian; produces clear text with correct case government." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently in Hungarian; flexible professional use including complex verb-prefix patterns." },
+      "5": { "code": "C2",    "descriptor": "Mastery of Hungarian; native-like command including definite/indefinite conjugation and complex suffixation." }
+    }
+  },
+
+  "el-GR": {
+    "name": "Greek (Greece)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / Greek Ministry of Education KPG exam",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Modern Greek for immediate needs." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text in Modern Greek; handles most everyday situations." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently; produces clear, detailed Greek text on a wide range of subjects." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently in Greek; flexible, effective professional use." },
+      "5": { "code": "C2",    "descriptor": "Mastery of Modern Greek; native-like command including complex morphology and register awareness." }
+    }
+  },
+
+  "tr-TR": {
+    "name": "Turkish (Turkey)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / Yunus Emre Institute TYS (CEFR-aligned)",
+    "note": "Turkish agglutinative morphology — vowel harmony and suffix stacking are key error indicators.",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Turkish for immediate needs; handles simple transactions." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text in Turkish; handles most everyday situations." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently in Turkish; produces clear, detailed text on a wide range of subjects." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently in Turkish; flexible, effective professional use including complex suffix chains." },
+      "5": { "code": "C2",    "descriptor": "Mastery of Turkish; native-like command including idiomatic expressions and correct vowel harmony throughout." }
+    }
+  },
+
+  "uk-UA": {
+    "name": "Ukrainian (Ukraine)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / UkrELP (CEFR-aligned framework)",
+    "note": "Watch for Russisms (русизми) and surzhyk — Ukrainian-Russian mixed speech — as non-native markers.",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Ukrainian for immediate needs." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text in Ukrainian; handles most everyday situations without Russisms." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently in standard Ukrainian; produces clear, detailed text free of surzhyk." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently in Ukrainian; flexible, effective professional use with correct case government." },
+      "5": { "code": "C2",    "descriptor": "Mastery of Ukrainian; native-like command with full awareness of standard vs dialectal forms." }
+    }
+  },
+
+  "ro-RO": {
+    "name": "Romanian (Romania)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / Romanian Ministry of Education",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Romanian for immediate needs." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text in Romanian; handles most everyday situations." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently in Romanian; produces clear, detailed text on a wide range of subjects." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently in Romanian; flexible, effective professional use." },
+      "5": { "code": "C2",    "descriptor": "Mastery of Romanian; native-like command including enclitic article and case agreement." }
+    }
+  },
+
+  "bg-BG": {
+    "name": "Bulgarian (Bulgaria)",
+    "reference": "CEFR",
+    "authority": "Council of Europe / Sofia University BLS",
+    "levels": {
+      "1": { "code": "A1/A2", "descriptor": "Can understand and use basic Bulgarian for immediate needs." },
+      "2": { "code": "B1",    "descriptor": "Can produce simple connected text in Bulgarian; handles most everyday situations." },
+      "3": { "code": "B2",    "descriptor": "Can interact fluently in Bulgarian; produces clear, detailed text on a wide range of subjects." },
+      "4": { "code": "C1",    "descriptor": "Can express ideas fluently in Bulgarian; flexible, effective professional use." },
+      "5": { "code": "C2",    "descriptor": "Mastery of Bulgarian; native-like command including definite article forms and verbal aspect." }
+    }
+  },
+
+  "ar-AA": {
+    "name": "Arabic (Modern Standard + dialects)",
+    "reference": "ACTFL",
+    "authority": "American Council on the Teaching of Foreign Languages — actfl.org (free guidelines)",
+    "note": "ar-AA covers MSA (فصحى). Dialectal variant (Egyptian, Levantine, Gulf, Maghrebi) unknown unless briefed. Code-switching MSA/dialect is a key non-native marker.",
+    "levels": {
+      "1": { "code": "Novice",       "descriptor": "Can communicate minimally on very familiar topics using memorized words and fixed phrases in MSA." },
+      "2": { "code": "Intermediate", "descriptor": "Can create with language; handle uncomplicated communicative tasks using basic MSA structures." },
+      "3": { "code": "Advanced",     "descriptor": "Can narrate and describe in MSA using paragraph-length discourse; handles a variety of topics." },
+      "4": { "code": "Superior",     "descriptor": "Can discuss topics extensively, support opinions and hypothesize in MSA with high precision." },
+      "5": { "code": "Distinguished","descriptor": "Exceptional precision and cultural nuance in MSA; can operate across registers including formal oratory." }
+    }
+  },
+
+  "hi-IN": {
+    "name": "Hindi (India)",
+    "reference": "ACTFL",
+    "authority": "American Council on the Teaching of Foreign Languages — actfl.org (free guidelines)",
+    "note": "No single globally standardized Hindi proficiency test. ACTFL scale is the most widely recognized free reference.",
+    "levels": {
+      "1": { "code": "Novice",       "descriptor": "Can communicate minimally on very familiar topics using memorized Hindi words and phrases." },
+      "2": { "code": "Intermediate", "descriptor": "Can create simple Hindi sentences; handles basic communicative tasks on familiar social topics." },
+      "3": { "code": "Advanced",     "descriptor": "Can narrate and describe in Hindi using paragraph-length discourse; handles gender agreement and postpositions correctly." },
+      "4": { "code": "Superior",     "descriptor": "Can discuss topics extensively in Hindi; precision in case postpositions, verb conjugation, and register." },
+      "5": { "code": "Distinguished","descriptor": "Native-like Hindi command with cultural nuance; can write across formal registers." }
+    }
+  },
+
+  "zh-CN": {
+    "name": "Chinese Simplified (Mainland China)",
+    "reference": "HSK",
+    "authority": "Hanban / Confucius Institute Headquarters — chinesetest.cn (free descriptors)",
+    "note": "Classic HSK 1-6. New HSK 3.0 (2021) extends to 9 bands; classic HSK 6 remains the professional benchmark.",
+    "levels": {
+      "1": { "code": "HSK 1-2", "descriptor": "Can understand and use very familiar everyday Chinese expressions; survival-level communication." },
+      "2": { "code": "HSK 3",   "descriptor": "Can communicate on familiar topics; basic professional communication possible." },
+      "3": { "code": "HSK 4",   "descriptor": "Can discuss a wide range of topics with reasonable fluency; handles complex characters." },
+      "4": { "code": "HSK 5",   "descriptor": "Can read newspapers and watch films without subtitles; professional-level Chinese." },
+      "5": { "code": "HSK 6",   "descriptor": "Can easily comprehend any written or spoken Chinese; expresses spontaneously with precision — near native." }
+    }
+  },
+
+  "zh-TW": {
+    "name": "Chinese Traditional (Taiwan)",
+    "reference": "TOCFL",
+    "authority": "Mandarin Training Center, MTAC Taiwan — tocfl.tw (free descriptors)",
+    "note": "Traditional characters expected. Taiwan-specific vocabulary conventions apply (軟體 not 软件, 手機 not 手机). TOCFL maps to CEFR.",
+    "levels": {
+      "1": { "code": "Band A (A1/A2)", "descriptor": "Can understand and use basic Traditional Chinese for immediate needs." },
+      "2": { "code": "Band B (B1)",    "descriptor": "Can produce simple connected Traditional Chinese text; handles most everyday situations." },
+      "3": { "code": "Band C (B2)",    "descriptor": "Can interact fluently; produces clear, detailed Traditional Chinese text on a wide range of subjects." },
+      "4": { "code": "Band D (C1)",    "descriptor": "Can express ideas fluently; flexible, effective professional use of Traditional Chinese." },
+      "5": { "code": "Band E/F (C2)",  "descriptor": "Mastery of Traditional Chinese; native-like command with Taiwan-specific register awareness." }
+    }
+  },
+
+  "zh-HK": {
+    "name": "Chinese Traditional (Hong Kong / Cantonese context)",
+    "reference": "TOCFL",
+    "authority": "Mandarin Training Center, MTAC Taiwan — tocfl.tw (free descriptors, Traditional Chinese benchmark)",
+    "note": "Traditional characters expected (same as zh-TW). HK context: Cantonese-specific vocabulary and sentence-final particles (囉, 喎, 咋, 囧) may appear and are legitimate in informal register. Simplified characters are an error here.",
+    "levels": {
+      "1": { "code": "Band A (A1/A2)", "descriptor": "Can understand and use basic Traditional Chinese for immediate needs; may use Cantonese-influenced phrasing." },
+      "2": { "code": "Band B (B1)",    "descriptor": "Can produce simple connected Traditional Chinese text in HK conventions." },
+      "3": { "code": "Band C (B2)",    "descriptor": "Can interact fluently; produces clear Traditional Chinese text with awareness of HK/Cantonese distinctions." },
+      "4": { "code": "Band D (C1)",    "descriptor": "Can express ideas fluently; effective professional use of Traditional Chinese with HK register awareness." },
+      "5": { "code": "Band E/F (C2)",  "descriptor": "Mastery of Traditional Chinese in HK context; native-like command with full Cantonese/Mandarin register control." }
+    }
+  },
+
+  "ja-JP": {
+    "name": "Japanese (Japan)",
+    "reference": "JLPT",
+    "authority": "Japan Foundation / Japan Educational Exchanges and Services — jlpt.jp (free descriptors)",
+    "levels": {
+      "1": { "code": "N5", "descriptor": "Can understand some basic Japanese; can read hiragana, katakana and basic kanji; handles simple transactions." },
+      "2": { "code": "N4", "descriptor": "Can understand basic Japanese used in everyday situations; can read simple texts." },
+      "3": { "code": "N3", "descriptor": "Can understand Japanese in everyday situations to a certain degree; can follow conversations on familiar topics." },
+      "4": { "code": "N2", "descriptor": "Can understand Japanese in a broad range of situations; can follow native-speaker conversations and read newspapers." },
+      "5": { "code": "N1", "descriptor": "Can understand Japanese at a high level in a wide variety of situations; near-native comprehension and expression." }
+    }
+  },
+
+  "ko-KR": {
+    "name": "Korean (Korea)",
+    "reference": "TOPIK",
+    "authority": "National Institute for International Education, Korea — topik.go.kr (free descriptors)",
+    "levels": {
+      "1": { "code": "TOPIK Level 1",   "descriptor": "Can carry out basic survival communication using mostly familiar words and phrases." },
+      "2": { "code": "TOPIK Level 2-3", "descriptor": "Can communicate in familiar social situations; limited complexity; basic reading and writing." },
+      "3": { "code": "TOPIK Level 4",   "descriptor": "Can use language fairly fluently for most everyday and some professional topics." },
+      "4": { "code": "TOPIK Level 5",   "descriptor": "Can use language in professional, academic and political contexts with precision." },
+      "5": { "code": "TOPIK Level 6",   "descriptor": "Can use Korean naturally and fluently without limitation; near-native proficiency." }
+    }
+  },
+
+  "vi-VN": {
+    "name": "Vietnamese (Vietnam)",
+    "reference": "ACTFL",
+    "authority": "American Council on the Teaching of Foreign Languages — actfl.org (free guidelines)",
+    "note": "No single globally standardized Vietnamese proficiency test for Vietnamese as L1/L2. ACTFL is the most widely used free reference.",
+    "levels": {
+      "1": { "code": "Novice",       "descriptor": "Can communicate minimally on very familiar topics using memorized Vietnamese words and phrases." },
+      "2": { "code": "Intermediate", "descriptor": "Can create simple Vietnamese sentences; handles basic everyday topics with classifiers and tones." },
+      "3": { "code": "Advanced",     "descriptor": "Can narrate and describe in Vietnamese using paragraph-length discourse; handles tonal precision and classifiers correctly." },
+      "4": { "code": "Superior",     "descriptor": "Can discuss topics extensively in Vietnamese; precision in tone marking, classifiers, and formal register." },
+      "5": { "code": "Distinguished","descriptor": "Native-like Vietnamese command; can write across formal and informal registers with full tonal and syntactic control." }
+    }
+  },
+
+  "th-TH": {
+    "name": "Thai (Thailand)",
+    "reference": "ACTFL",
+    "authority": "American Council on the Teaching of Foreign Languages — actfl.org (free guidelines)",
+    "note": "Thai is tonal and uses classifiers. Politeness particles (ครับ/ค่ะ) indicate gender and register — inconsistency is a non-native marker.",
+    "levels": {
+      "1": { "code": "Novice",       "descriptor": "Can communicate minimally in Thai using memorized words and basic phrases; limited tonal control." },
+      "2": { "code": "Intermediate", "descriptor": "Can handle uncomplicated communicative tasks in Thai; basic classifier and particle use." },
+      "3": { "code": "Advanced",     "descriptor": "Can narrate and describe in Thai using paragraph-length discourse with consistent tonal representation." },
+      "4": { "code": "Superior",     "descriptor": "Can discuss topics extensively in Thai with precision; correct use of politeness levels and classifiers." },
+      "5": { "code": "Distinguished","descriptor": "Native-like Thai command with full tonal, classifier and register control across formal and informal contexts." }
+    }
+  },
+
+  "ms-MY": {
+    "name": "Malay (Malaysia)",
+    "reference": "ACTFL",
+    "authority": "American Council on the Teaching of Foreign Languages — actfl.org (free guidelines)",
+    "note": "Malaysian Standard Malay (Bahasa Malaysia). Avoid rojak (English-Malay code-switching) in formal register.",
+    "levels": {
+      "1": { "code": "Novice",       "descriptor": "Can communicate minimally in Malay using memorized words and phrases." },
+      "2": { "code": "Intermediate", "descriptor": "Can handle basic communicative tasks in Malay; simple imbuhan (affixation) use." },
+      "3": { "code": "Advanced",     "descriptor": "Can narrate and describe in Malay with correct imbuhan and active/passive voice distinction." },
+      "4": { "code": "Superior",     "descriptor": "Can discuss topics extensively in Malay; precise imbuhan use, formal register without rojak." },
+      "5": { "code": "Distinguished","descriptor": "Native-like Malay command; correct imbuhan throughout, formal vs colloquial register control." }
+    }
+  },
+
+  "id-ID": {
+    "name": "Indonesian (Indonesia)",
+    "reference": "UKBI",
+    "authority": "Badan Pengembangan dan Pembinaan Bahasa, Indonesia — badanbahasa.kemdikbud.go.id (free)",
+    "note": "UKBI (Uji Kemahiran Berbahasa Indonesia) is the official standardized test, administered by the Indonesian government.",
+    "levels": {
+      "1": { "code": "Marginal",        "descriptor": "Very limited Indonesian proficiency; frequent errors impede communication even in simple contexts." },
+      "2": { "code": "Semenjana",       "descriptor": "Can handle basic everyday Indonesian communication; some errors in imbuhan and active/passive voice." },
+      "3": { "code": "Madya",           "descriptor": "Can communicate on a range of topics with reasonable accuracy; handles most imbuhan patterns correctly." },
+      "4": { "code": "Unggul",          "descriptor": "Can use Indonesian effectively in professional and formal contexts; consistent use of bahasa baku." },
+      "5": { "code": "Istimewa",        "descriptor": "Master-level Indonesian; precise, fluent and culturally appropriate across all formal and informal registers." }
+    }
+  }
+}

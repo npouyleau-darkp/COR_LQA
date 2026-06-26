@@ -1,0 +1,259 @@
+{
+  "_meta": "3-5 reliable non-native red flags per language. These are patterns that systematically indicate non-native acquisition, NOT register choices.",
+
+  "fr-FR": [
+    "Calques anglais courants : 'faire du sens' (< 'make sense'), 'définitivement' (< 'definitely') au sens affirmatif, 'éventuellement' (< 'eventually')",
+    "Omission du 'ne' dans la négation en contexte formel : 'j'ai pas vu' acceptable à l'oral informel, erreur à l'écrit formel",
+    "Accord du participe passé avec avoir + COD antéposé omis : 'les fautes qu'il a fait' au lieu de 'faites'",
+    "Subjonctif évité par substitution à l'indicatif : 'bien que je suis fatigué' au lieu de 'sois'",
+    "Confusion 'sur/en/à' pour les langues et supports : 'en anglais' correct, 'sur anglais' ou 'à l'anglais' sont des calques"
+  ],
+
+  "de-DE": [
+    "Anglizismen ohne morphologische Integration : 'gecancelt', 'gedownloadet' statt 'abgesagt', 'heruntergeladen'",
+    "Genus-Fehler : 'das Email' (korrekt: 'die E-Mail'), 'der Thema' (korrekt: 'das Thema')",
+    "Verbstellung im Nebensatz falsch : Verb nicht an Endposition — DaF-typisches Muster",
+    "Konjunktiv II gemieden : 'wenn ich Zeit habe' statt 'wenn ich Zeit hätte' in hypothetischen Kontexten",
+    "Falsche Präpositionalrektion : Kasusauswahl nach Wechselpräpositionen (an, auf, in) mit Dativ vs. Akkusativ vertauscht"
+  ],
+
+  "it-IT": [
+    "Congiuntivo sostituito da indicativo : 'benché è bravo' invece di 'benché sia bravo'; 'credo che ha ragione' invece di 'abbia'",
+    "Preposizioni calco dall'inglese : 'dipendere su' (< 'depend on') invece di 'dipendere da'",
+    "Anglicismi non adattati morfologicamente : 'ho shoppato', 'twittare' senza rispettare le convenzioni morfologiche italiane",
+    "Concordanza pronome clítico-participio passato omessa : 'le ho visto' invece di 'le ho viste' (con clitico femminile plurale)",
+    "Struttura passiva calco dall'inglese al posto di costruzioni italiane naturali con 'si passivante'"
+  ],
+
+  "nl-NL": [
+    "Werkwoordsvolgorde in bijzinnen incorrect : hoofdwerkwoord niet op eindpositie bij samengestelde tijden",
+    "Valse vrienden met Engels : 'eventueel' ≠ 'eventually' (= 'uiteindelijk'); 'actueel' ≠ 'actual' (= 'werkelijk')",
+    "Fout lidwoordgebruik : 'de'-woorden en 'het'-woorden verwisseld — 'het probleem' correct, 'de probleem' fout",
+    "Anglicismen met foute integratie : 'ge-updated', 'ge-uploaded' in plaats van gevestigde Nederlandse equivalenten",
+    "D/T-regel fouten in spelling van zwakke werkwoorden : 'hij reist' vs. 'hij reed' (verleden tijd); 't kofschip-regel gemist"
+  ],
+
+  "sv-SE": [
+    "Genus-fel (en/ett) : 'ett problem' correct, 'en problem' fel; icke-infödd väljer ofta fel genus",
+    "Ordföljd i bisats : negationsadverb ('inte') placerat fel — ska komma före predikatet i bisats",
+    "Anglicismer med felaktig integrering : 'checka in', 'booka' används men böjs inkonsekvent",
+    "Oregelbundna pluralformer feldade : 'man/män', 'hand/händer', 'mus/möss' — inte 'mans', 'hands'",
+    "Verbformer i starka verb felaktiga : 'sjunga/sjöng/sjungit' — stammens vokalväxling utelämnad"
+  ],
+
+  "no-NO": [
+    "Genus-feil : en/ei/et — særlig 'ei' (femininum) erstattes av 'en' av ikke-innfødte",
+    "Setningsordstilling : verbal ikke på andreplass i deklarativsetning (V2-regelen brutt)",
+    "Bokmål/Nynorsk-blanding : former fra begge målformer brukt om hverandre i samme tekst",
+    "Dobbel bestemmelse inkonsistent : 'den store bilen' (korrekt), 'den stor bilen' (feil — mangler svak adjektivform)",
+    "Anglicismer : direkte engelske lån uten norsk fonologisk tilpasning"
+  ],
+
+  "da-DK": [
+    "Genus-fejl (en/et) : 'et problem' correct, 'en problem' forkert; ikke-indfødte forveksler genus",
+    "Manglende 'stød' i stavning : dansk prosodi-markør der ikke skrives men afspejles i morfologi — undgås ved calques",
+    "Verbformer : stærke verber fejlbøjes som svage ('kom' ikke 'komte'; 'tog' ikke 'tagede')",
+    "Anglicismer med forkert morfologisk integration",
+    "Sætningsordstilling : V2-reglen ikke overholdt i deklarative sætninger"
+  ],
+
+  "fi-FI": [
+    "Vokalharmoni-fejl i suffikser : bagre vokaler (a, o, u) og fremre vokaler (ä, ö, y) blandes — 'talossa' correct, 'talosssa' med forkert vokal",
+    "Partitiv vs. akkusativ fejlveksling : 'juon kahvia' (partiel, ongoing) vs. 'juon kahvin' (total, complete) — ikke-indfødte blander dem",
+    "Overflødige personlige pronominer : finsk verbsystem indkoder person i endelsen — 'hän menee' vs. calque med ekstra pronomen",
+    "Forkert kasus ved postpositioner : 'talon takana' (bag huset, genitiv) vs. forkert kasus-valg",
+    "Engelske calques der ignorerer finsk tema-kommentar-ordstilling og kasussystemets rolle"
+  ],
+
+  "es-ES": [
+    "Calcos del inglés : 'aplicar para un trabajo' (< 'apply for') en lugar de 'solicitar un puesto'; 'hacer sentido' en lugar de 'tener sentido'",
+    "Leísmo/laísmo : confusión de pronombres clíticos lo/la/le — uso incorrecto según norma estándar peninsular",
+    "Subjuntivo evitado : 'espero que vendrá' en lugar de 'espero que venga'; 'quiero que él va' en lugar de 'vaya'",
+    "Ser vs. estar : confusión en contextos de estado permanente vs. transitorio ('estoy aburrido' vs. 'soy aburrido' — significados distintos)",
+    "Uso incorrecto de 'vosotros' : forma omitida o reemplazada por 'ustedes' en contexto peninsular, o viceversa"
+  ],
+
+  "es-419": [
+    "Mezcla de variantes regionales : voseo con conjugación de tuteo ('vos tienes' en lugar de 'vos tenés'), o mezcla es-MX / es-AR no señalada",
+    "Anglicismos directos sin adaptación : 'parquear' vs. 'estacionar'; 'aplicar' (to apply) usado con sentido no idiomático",
+    "Calcos del inglés en estructura : 'tomar una decisión' acceptable pero 'hacer una decisión' es calco",
+    "Variación léxica regional no señalada : 'autobús' vs. 'camión' vs. 'colectivo' — sin indicación de variante esperada",
+    "Confusión de pronombres clíticos : 'le/lo/la' — norma varía según sub-variante LATAM y no se indica"
+  ],
+
+  "pt-PT": [
+    "Gerundismo brasileiro : 'estou fazendo' en lugar de 'estou a fazer' — gerúndio não é padrão em PT-PT",
+    "Clíticos en posición incorreta : próclise obrigatória en PT-PT en determinados contextos ignorada; mesóclise ausente",
+    "Vocabulário brasileiro : 'ônibus' (PT-BR) em vez de 'autocarro' (PT-PT); 'trem' em vez de 'comboio'",
+    "Uso de 'você' como 2ª pessoa do singular em contexto PT-PT : o pronome preferido é 'tu' em PT-PT informal",
+    "Falsos amigos com inglês : 'borracha' (caoutchouc / eraser, não embarrassed); 'polvo' (pieuvre, não pollen)"
+  ],
+
+  "pt-BR": [
+    "Lusismos : 'autocarro' em vez de 'ônibus'; 'comboio' em vez de 'trem'; 'frigorífico' em vez de 'geladeira'",
+    "Colocação pronominal europeia : 'deu-me' (PT-PT) em vez de 'me deu' (PB — próclise preferida no início de oração)",
+    "Regência verbal em conflito com PB informal : 'assistir o filme' (PB informal aceite) vs. 'assistir ao filme' (PB formal) — calco europeu marcado",
+    "Anglicismos não adaptados em contextos que têm equivalente nativo : 'deletar' (aceitável) mas 'printar' em vez de 'imprimir' (mais formal)",
+    "Uso do 'tu' com conjugação incorreta no PB : 'tu foi' (coloquial) vs. 'tu foste' (PT-PT) vs. 'você foi' (PB padrão)"
+  ],
+
+  "ru-RU": [
+    "Англицизмы без морфологической адаптации : 'перформить', 'апдейтить' вместо 'показывать результаты', 'обновлять'",
+    "Ошибки в падежном управлении : 'объяснить его' вместо 'объяснить ему' (дательный падеж при глаголе 'объяснить')",
+    "Видовые ошибки : несовершенный вид вместо совершенного при завершённом действии и наоборот",
+    "Неестественный порядок слов как калька с английского : нейтральный СВО-порядок применён там, где по-русски нужна топикализация",
+    "Пропуск кратких форм прилагательных там, где они обязательны : 'я готов' (краткое) vs. 'я готовый' (полное — неуместно в предикате)"
+  ],
+
+  "pl-PL": [
+    "Anglicyzmy bez integracji fleksyjnej : 'googlować' dopuszczalne, ale błędne odmienianie zapożyczeń przez przypadki",
+    "Błędy w deklinacji przy liczebnikach : liczebniki 2-4 wymagają mianownika, 5+ dopełniacza liczby mnogiej — często mylone",
+    "Nadużywanie strony biernej : kalka z angielskiego — polszczyzna preferuje konstrukcje bezosobowe lub zwrotne",
+    "Aspekt czasownika : niedokonany vs. dokonany w złym kontekście — 'czytałem' (niedok.) vs. 'przeczytałem' (dok., zakończone)",
+    "Zła rekcja czasownika : 'bać się' wymaga dopełniacza, nie biernika — 'bać się psa' nie 'bać się psa' (tu ok) ale ogólny wzorzec błędu"
+  ],
+
+  "cs-CZ": [
+    "Anglicismy bez správné flexe : zapůjčená slovesa špatně začleněna do české konjugace",
+    "Chybná slovesná rekce : špatný pád po určitých slovesech — 'čekat na koho/co' (akuzativ), ne 'čekat pro koho'",
+    "Nadměrné užívání trpného rodu : kalka z angličtiny — čeština preferuje aktivní nebo zvratné konstrukce",
+    "Aspekt slovesa : dokonavý vs. nedokonavý ve špatném kontextu — 'psal jsem' (nedok.) vs. 'napsal jsem' (dok.)",
+    "Chybné předložkové vazby : záměna 'na/v' v topografických kontextech — 'na Slovensku' ale 'v Německu'"
+  ],
+
+  "hu-HU": [
+    "Anglicizmusok hibás ragozással : átvett szavak nem kapnak helyes magyar toldalékokat",
+    "Vonzathibák : ige melletti vonzat helytelen esete — 'vár vkit' (tárgy) vs. 'vár vmire' (szuperesszívusz)",
+    "Határozott vs. határozatlan ragozás tévesztése : 'látok egy házat' (határoz.) vs. 'látom a házat' (határoz.ragozás) — nem-anyanyelvi minta",
+    "Igekötő-elválasztás : tagadásban és kérdésben az igekötő elválik a töve — 'nem megyek el' helytelen, 'nem megyek el' helyes (elválik)",
+    "Szórend : a fókuszos elem nem közvetlenül az ige előtt áll — nem-anyanyelvi szórendezési minta"
+  ],
+
+  "el-GR": [
+    "Αγγλισμοί χωρίς κλιτική ένταξη : ρήματα δανεισμένα από αγγλικά που κλίνονται ανορθόδοξα",
+    "Λάθη στη συμφωνία υποκείμενου-ρήματος σε σύνθετες προτάσεις με παρεμβολή",
+    "Λάθος γένος αρθρόνων : παράλειψη άρθρου ή χρήση λάθος γένους — 'ο/η/το' συχνά λάθος",
+    "Υποτακτική αντί οριστικής : 'νομίζω ότι να έχει' αντί 'νομίζω ότι έχει'",
+    "Εγκλιτικά (αδύνατοι τύποι) : λάθος θέση ή παράλειψη αδύνατων τύπων αντωνυμίας ('το μου δίνεις' αντί 'μου το δίνεις')"
+  ],
+
+  "tr-TR": [
+    "Sesli uyumu hataları : eklerde arka/ön sesli ayrımı yanlış — 'evde' doğru, 'evda' yanlış",
+    "Ek yığılmasında hata : ekler yanlış sırada — Türkçede kök + çoğul + iyelik + hal eki sırası zorunlu",
+    "İngilizce calque'lardan kaynaklanan cümle yapısı : nesne-özne-yüklem sırası bozulmuş",
+    "Anglisizmler yerine Türkçe karşılık kullanılmaması : 'update etmek' yerine 'güncellemek', 'cancel etmek' yerine 'iptal etmek'",
+    "İyelik + hal eki kombinasyonu : 'evimin' (benim ev + gen.) yerine 'evim-in' hatalı formlar"
+  ],
+
+  "uk-UA": [
+    "Русизми : слова або форми, перенесені з російської, яких немає в стандартній українській — 'понімаю' замість 'розумію'",
+    "Суржик : мішання українських та російських елементів в одному тексті",
+    "Відмінкові помилки : неправильний відмінок після прийменників — 'по' + місцевий відмінок, не давальний в певних контекстах",
+    "Дієслівне керування : неправильний відмінок після певних дієслів — 'навчати (кого?)' vs 'навчати (чого?)'",
+    "Вживання 'є' (копули) там, де вона факультативна або не потрібна — вплив англійської структури 'is'"
+  ],
+
+  "ro-RO": [
+    "Anglicisme neintegrate : 'a posta' (to post), 'a accesa' (to access) fără adaptare morfologică română corectă",
+    "Acord greșit gen-număr : adjectiv neacordat cu substantivul în gen, număr și caz",
+    "Articol hotărât enclitic omis sau greșit declinat : 'omul' (nom.), 'omului' (gen./dat.) — declinarea enclitică greșită",
+    "Confuzie 'pe' ca marcant de obiect direct : omis sau aplicat calque de la engleză",
+    "Confuzie viitor : 'voi face' (viitorul I literar) vs 'o să fac' (viitorul popular) — inconsistență de registru"
+  ],
+
+  "bg-BG": [
+    "Руссизми : директни заемки от руски с неправилна интеграция в българската морфология",
+    "Членуване : пропуснат или неправилно поставен определителен член (пълен/кратък при прилагателни)",
+    "Падежни остатъци : звателна форма или дателен падеж употребени в неправилен контекст",
+    "Несъгласуване на прилагателно с именна група : грешен род или число",
+    "Аспект на глагола : свършен вид (перфектив) употребен вместо несвършен (имперфектив) или обратно"
+  ],
+
+  "ar-AA": [
+    "خلط فصحى وعامية (code-switching) : كلمات أو تعابير عامية في نص رسمي أو العكس بدون إشارة إلى الاختيار الأسلوبي",
+    "أخطاء الإعراب : غياب أو خطأ في علامات الإعراب (الرفع، النصب، الجر) في سياق رسمي يستلزمها",
+    "أخطاء المطابقة : عدم تطابق الصفة مع الموصوف في الجنس والعدد والتعريف — 'الطالب المجتهدون' (خطأ)",
+    "تعريب مباشر من الإنجليزية دون اشتقاق عربي : استخدام كلمات أجنبية بدلاً من المصطلح العربي الصحيح أو المقابل المعتمد",
+    "أخطاء جمع التكسير : استخدام الجمع السالم حيث يُستوجب جمع التكسير غير القياسي أو العكس"
+  ],
+
+  "hi-IN": [
+    "अंग्रेज़ी calques (कालक): 'decision लेना' की जगह 'निर्णय लेना/करना'; 'sense बनाना' की जगह 'समझ में आना'",
+    "परसर्ग (postposition) की गलतियाँ: 'को', 'से', 'में', 'पर', 'के लिए' का गलत चुनाव — अंग्रेज़ी preposition से प्रभावित",
+    "भूतकाल में लिंग-वचन की असहमति: क्रिया का मिलान कर्ता/कर्म के लिंग-वचन से न होना",
+    "आदरणीय vs अन्य सर्वनाम: 'आप/तुम/तू' का गलत प्रयोग — संदर्भ के अनुसार सम्मान स्तर का भ्रम",
+    "नकारात्मक वाक्य: 'नहीं' (declarative) और 'मत' (imperative) का गलत स्थान पर प्रयोग"
+  ],
+
+  "zh-CN": [
+    "量词误用 : 错误的量词搭配 — '一张纸' correct, '一本纸' wrong; '一条鱼' correct, '一个鱼' wrong",
+    "正简混用 : 繁体字混入简体文本 — 如 '電腦' 替代 '电脑'",
+    "句末语气词误用或缺失 : '吧/呢/啊/嘛' 使用不当或完全照搬英语句末逻辑",
+    "离合词当作整体动词 : '见面你' 错误 — '见面' 是离合词，正确为 '和你见面' 或 '跟你见面'",
+    "'把'字句结构错误 : 把字句要求结果补语或趋向补语 — '把书读' 不完整，应为 '把书读完'"
+  ],
+
+  "zh-TW": [
+    "简体字混入繁体文本 : '软件'(CN) 应为 '軟體'(TW); '手机'(CN) 应为 '手機'(TW)",
+    "大陆词汇用于台湾语境 : '出租车'(CN) vs '計程車'(TW); '公交车' vs '公車'; '超市' vs '超市'(TW OK)",
+    "台湾特有敬语或尊称缺失 : 台湾书面礼貌表达和大陆书面语在某些正式语境中有差异",
+    "量词与台湾惯用不符 : 少数量词台湾用法与大陆有出入，照搬大陆用法",
+    "正字法差异忽略 : 部分字的正体字形(台湾标准字体)与大陆简体对应写法混用"
+  ],
+
+  "zh-HK": [
+    "普通话专属表达用于广东话语境 : 仅适用于普通话书面语的词汇或结构，在香港中文语境中不自然",
+    "简体字使用 : 香港脉络下应使用繁体字，出现简体字是明显错误",
+    "粤语特有词汇或语气词缺失 : 预期广东话文本中出现普通话等价词而非粤语词 (如 '係' vs '是'; '唔係' vs '不是')",
+    "量词不符粤语惯例 : 广东话量词和普通话部分量词不同，直接套用普通话量词",
+    "句末语气词错误 : 粤语特有语气词 (囉、喎、咋、囧、啩) 误用、缺失或用了普通话语气词代替"
+  ],
+
+  "ja-JP": [
+    "格助詞の混乱 : は/が/を/に の誤選択 — 主題の 'は' と主格の 'が' の混同が特に顕著な非母語者パターン",
+    "敬語の誤用 : 尊敬語・謙譲語・丁寧語の混同 — 'いただく'(謙譲) と 'くださる'(尊敬) の誤用",
+    "外来語のカタカナ化 : 英語由来ではない概念の不必要なカタカナ化、または確立されたカタカナ形の無視",
+    "形式名詞の誤用 : 'こと/もの/ところ/わけ/はず' の文法的機能を混同した使用",
+    "文体の混在 : 'である調' と 'です・ます調' を同一文章内で混用"
+  ],
+
+  "ko-KR": [
+    "존댓말/반말 mixing : formal register (합쇼체/해요체) and informal register (해체) mixed inappropriately within the same text",
+    "은/는 vs 이/가 confusion : topic marker (은/는) and subject marker (이/가) are semantically distinct — non-natives frequently interchange them",
+    "Object particle (을/를) omission : incorrectly dropped in formal written Korean where it is required",
+    "Anglicisms not adapted to Korean phonology : pronunciation spelling incorrect (e.g., 'internet' → '인터넷' correct, but 'intanet' forms)",
+    "Connective ending errors : -고 (sequential/and), -아서/어서 (causal), -으면/면 (conditional) misapplied in causal or temporal chains"
+  ],
+
+  "vi-VN": [
+    "Classifier (loại từ) errors : wrong classifier paired with nouns — 'cái' (objects), 'con' (animals/some objects), 'chiếc' (paired items), 'quyển' (books) frequently mixed",
+    "Tone diacritics incorrect or missing : Vietnamese 6 tones are written with diacritics — sắc/huyền/hỏi/ngã/nặng omitted or wrong tone mark",
+    "Aspect particles misused or omitted : 'đã' (past completed), 'đang' (ongoing), 'sẽ' (future), 'rồi' (already) misplaced or missing",
+    "Calques from French or English : direct structural borrowing not adapted to Vietnamese SVO-plus-particle system",
+    "Register mixing : formal (văn viết) and colloquial (tiếng lóng, tiếng thường ngày) markers used inconsistently"
+  ],
+
+  "th-TH": [
+    "Classifier (ลักษณนาม) misuse : wrong classifier paired with noun — 'ตัว' (animals, letters), 'คน' (people), 'อัน' (small objects), 'เล่ม' (books, notebooks) frequently confused",
+    "Politeness particle inconsistency : 'ครับ' (male speaker) and 'ค่ะ/คะ' (female speaker) applied inconsistently or opposite to speaker gender",
+    "Formal vs informal pronoun mixing : 'ฉัน/ผม' (formal/neutral) vs 'เรา' (informal/colloquial) or 'หนู' (child/subordinate) used in wrong register",
+    "Preposition-equivalent calques from English : spatial relationships (ใน/บน/ที่/ของ) mapped incorrectly from English 'in/on/at/of'",
+    "Sentence-final particle over- or under-use : 'นะ', 'นะครับ', 'เลย', 'แล้ว' used in contextually inappropriate positions"
+  ],
+
+  "ms-MY": [
+    "Imbuhan (affix) errors : awalan 'meN-' dropped or wrong form used — 'dia beli' instead of 'dia membeli' in formal written bahasa baku",
+    "Rojak (code-switching) in formal register : English words inserted without adaptation when Malay equivalents exist",
+    "Active/passive voice confusion : 'meN-' (active), 'di-' (passive by 3rd person), 'ter-' (accidental/potential passive) incorrectly alternated",
+    "English calques ignoring Malay word order and focus : topic-comment structure not respected",
+    "Colloquial forms in formal register : 'tak' instead of 'tidak', 'dah' instead of 'sudah', 'nak' instead of 'hendak/ingin'"
+  ],
+
+  "id-ID": [
+    "Bahasa non-baku in formal register : 'nggak/gak' instead of 'tidak'; 'gue/lo' instead of 'saya/Anda'; 'lu' instead of 'kamu'",
+    "Imbuhan meN- dropped in active construction : 'dia baca buku' instead of 'dia membaca buku' — informal spoken habit in written formal text",
+    "Active/passive imbuhan confusion : 'me-' (active, subject is agent), 'di-' (passive, subject is patient) — incorrectly switched",
+    "English borrowings where Indonesianized or native equivalent exists : 'delete' instead of 'hapus'; 'download' instead of 'unduh' in formal contexts",
+    "Reduplication errors : reduplicated forms misformed or used out of context (grammatical reduplication vs. lexical reduplication distinction)"
+  ]
+}

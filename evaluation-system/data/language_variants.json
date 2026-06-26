@@ -1,0 +1,63 @@
+{
+  "_meta": "Regional variant data. Only languages with meaningful written standard variants are listed. If a language code is absent, set regionalCoherence.applicable = false.",
+
+  "fr-FR": {
+    "variants": ["fr-FR", "fr-CA", "fr-CH", "fr-BE"],
+    "note": "Metropolitan French (fr-FR) expected. Flag Québécois markers (fr-CA: 'char', 'magasiner', 'blonde', interrogative 'tu' particle) or Swiss/Belgian archaisms if found."
+  },
+
+  "es-ES": {
+    "variants": ["es-ES", "es-419"],
+    "note": "Peninsular Spanish expected. Flag Latin American markers: voseo (vos + conjugation), heavy LATAM vocabulary ('camión' for bus, 'celular' for phone), absence of 'vosotros'."
+  },
+
+  "es-419": {
+    "variants": ["es-MX", "es-AR", "es-CO", "es-CL", "es-PE", "es-VE", "es-ES"],
+    "note": "Latin American Spanish generic (es-419). Sub-variant UNCERTAIN unless recruiter specifies. Flag mixing of distinct sub-variants (e.g., Argentine voseo + Mexican vocabulary). Do NOT force assignment — flag as UNCERTAIN if region unclear."
+  },
+
+  "pt-PT": {
+    "variants": ["pt-PT", "pt-BR"],
+    "note": "European Portuguese expected. Flag Brazilian markers: gerund constructions ('estou fazendo' instead of 'estou a fazer'), informal 'você' instead of 'tu', Brazilian vocabulary ('ônibus' not 'autocarro', 'trem' not 'comboio')."
+  },
+
+  "pt-BR": {
+    "variants": ["pt-BR", "pt-PT"],
+    "note": "Brazilian Portuguese expected. Flag European markers: perifrástica com 'a' + infinitivo ('estou a fazer'), 'tu' as informal pronoun with European conjugation, European vocabulary ('autocarro', 'comboio', 'frigorífico')."
+  },
+
+  "zh-CN": {
+    "variants": ["zh-CN", "zh-TW", "zh-HK"],
+    "note": "Simplified Chinese (Mainland) expected. Flag Traditional characters, Taiwan-specific vocabulary ('軟體' not '软件', '計程車' not '出租车'), or Cantonese-specific sentence-final particles."
+  },
+
+  "zh-TW": {
+    "variants": ["zh-TW", "zh-CN", "zh-HK"],
+    "note": "Traditional Chinese (Taiwan, TOCFL standard) expected. Flag Simplified characters or Mainland-specific phrasing ('软件' not '軟體', '手机' not '手機', '出租车' not '計程車')."
+  },
+
+  "zh-HK": {
+    "variants": ["zh-HK", "zh-TW", "zh-CN"],
+    "note": "Traditional Chinese (Hong Kong context) expected. Flag: Simplified characters (error); Mainland-only phrasing without Cantonese awareness; absence of expected Cantonese particles (囉, 喎, 咋) in informal register. Note: formal HK written Chinese can be similar to zh-TW."
+  },
+
+  "ar-AA": {
+    "variants": ["ar-MSA", "ar-EG", "ar-SA", "ar-AE", "ar-Levantine", "ar-MA"],
+    "note": "Modern Standard Arabic (فصحى) expected unless recruiter specifies a dialect. Flag MSA/dialect code-switching. Dialect UNCERTAIN unless briefed — do NOT force assignment. Note which dialectal markers are present (Egyptian: 'عايز/بتاع'; Levantine: 'هيك/منيح'; Gulf: 'وين/كيف'; Maghrebi: 'واش/بزاف')."
+  },
+
+  "no-NO": {
+    "variants": ["nb", "nn"],
+    "note": "Bokmål (nb) is the default and most common written standard. Nynorsk (nn) is a fully distinct written standard — mixing forms from both in the same text is an error. If text appears to be Nynorsk throughout, note it as a regional written standard choice, not an error."
+  },
+
+  "ru-RU": {
+    "variants": ["ru-RU", "ru-BY"],
+    "note": "Standard Russian (ru-RU) expected. Flag Ukrainian-influenced forms (surzhyk patterns) or Belarussian-specific constructions if found."
+  },
+
+  "de-DE": {
+    "variants": ["de-DE", "de-AT", "de-CH"],
+    "note": "Standard German (de-DE / Hochdeutsch) expected. Austrian (de-AT: 'Jänner' for January, 'Matura' for 'Abitur') and Swiss (de-CH: no 'ß', 'ss' used instead; 'Grüezi', 'Velo') are legitimate variants — flag only if a specific variant was expected and another delivered."
+  }
+}
