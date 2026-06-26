@@ -219,13 +219,13 @@ async function executeLqaAIEvaluator(questionIndex){
 
     function callGeminiCompletion(messages){
         return new Promise(function(resolve, reject){
-            var geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + secretApiKey;
+            var geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
             var contents = messages.map(function(m){
                 return { role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] };
             });
             fetch(geminiUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'x-goog-api-key': secretApiKey },
                 body: JSON.stringify({ contents: contents })
             }).then(function(networkResponse){
                 if (!networkResponse.ok){ reject(new Error('Network error. Status code: ' + networkResponse.status)); return; }
