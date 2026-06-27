@@ -19,11 +19,13 @@ function getPendingConfirmedErrors(key){
     catch (e) { return []; }
 }
 
-function addExceptionForLanguage(key, text){
+function addExceptionForLanguage(key, text, justification){
     var t = (text || '').trim();
     if (!t) return;
+    var j = (justification || '').trim();
     var pending = getPendingExceptions(key);
-    if (pending.indexOf(t) === -1) pending.push(t);
+    var alreadyExists = pending.some(function(e){ return (e.term || e) === t; });
+    if (!alreadyExists) pending.push({ term: t, justification: j });
     try { localStorage.setItem('lqaExceptions_pending_' + key, JSON.stringify(pending)); } catch (e) {}
     refreshExceptionsTracker();
 }
@@ -110,7 +112,8 @@ function handleNotAnErrorClick(evt){
     popup.querySelector('.popup-cancel-btn').addEventListener('click', function(){ popup.remove(); });
 
     popup.querySelector('.popup-confirm-btn').addEventListener('click', function(){
-        addExceptionForLanguage(langKey, issueText);
+        var justification = popup.querySelector('.popup-explanation').value;
+        addExceptionForLanguage(langKey, issueText, justification);
         popup.remove();
         var badge = document.createElement('span');
         badge.className = 'badge badge-exception-confirmed';

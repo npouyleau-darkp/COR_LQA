@@ -74,8 +74,10 @@ function _valRenderList(){
 
         if (_valCurrentTab === 'exceptions'){
             var list = getPendingExceptions(lang);
-            list.forEach(function(text, idx){
-                items.push({ lang: lang, index: idx, text: text });
+            list.forEach(function(entry, idx){
+                var term = (typeof entry === 'object') ? (entry.term || '') : entry;
+                var justification = (typeof entry === 'object') ? (entry.justification || '') : '';
+                items.push({ lang: lang, index: idx, text: term, justification: justification });
             });
         } else {
             var list2 = getPendingConfirmedErrors(lang);
@@ -97,6 +99,7 @@ function _valRenderList(){
             html += '<div class="val-item">' +
                 '<span class="val-item-lang">' + escapeHtmlHtmlEntities(item.lang) + '</span>' +
                 '<div class="val-item-text">' + escapeHtmlHtmlEntities(item.text) + '</div>' +
+                (item.justification ? '<div class="val-item-meta">Justification: ' + escapeHtmlHtmlEntities(item.justification) + '</div>' : '') +
                 '<div class="val-item-actions">' +
                 '<button type="button" class="val-btn-accept" ' +
                     'onclick="_valAcceptException(\'' + _valEscAttr(item.lang) + '\',' + item.index + ',this)">' +
@@ -134,7 +137,7 @@ function _valRenderList(){
 function _valAcceptException(lang, index, btn){
     var list = getPendingExceptions(lang);
     if (index < 0 || index >= list.length){ _valRenderList(); return; }
-    var text = list[index];
+    var text = (typeof list[index] === 'object') ? (list[index].term || '') : list[index];
     list.splice(index, 1);
     try { localStorage.setItem('lqaExceptions_pending_' + lang, JSON.stringify(list)); } catch(e) {}
     if (text){
