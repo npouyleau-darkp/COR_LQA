@@ -45,13 +45,11 @@ function executeLqaDiffAuditor(qi){
     if (!box) return;
     if (!cand.trim() && !ref.trim()){
         box.innerHTML = '<span style="color:#dc2626;font-weight:600;">Error: Inputs are empty.</span>';
-        box.style.display = 'block';
         return;
     }
     var html = computeLqaTextDiffSegments(cand, ref, mode);
     if (longFallback) html = '<div class="report-meta-note">Long text — showing paragraph-level comparison.</div>' + html;
     box.innerHTML = html;
-    box.style.display = 'block';
 }
 
 function runDiffSection(indices){ indices.forEach(executeLqaDiffAuditor); }
