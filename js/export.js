@@ -189,18 +189,13 @@ function exportConfirmedErrors(langKey){
     ].join('\n');
 
     var rows = list.map(function(e){
-        var sevClass = { Critical:'badge-critical', Major:'badge-major', Minor:'badge-minor' }[e.severity] || 'badge-minor';
-        var confClass = { Medium:'badge-conf-medium', Low:'badge-conf-low' }[e.confidence] || 'badge-conf-medium';
-        return '<tr><td>' + escapeHtmlHtmlEntities(e.date || '') + '</td>' +
-            '<td>' + escapeHtmlHtmlEntities(e.pillar || '') + '</td>' +
-            '<td><span class="badge ' + sevClass + '">' + escapeHtmlHtmlEntities(e.severity || '') + '</span></td>' +
-            '<td><span class="badge ' + confClass + '">' + escapeHtmlHtmlEntities(e.confidence || '') + '</span></td>' +
-            '<td>' + escapeHtmlHtmlEntities(e.issue || '') + '</td></tr>';
+        var term = (typeof e === 'string') ? e : (e.issue || '');
+        return '<tr><td>' + escapeHtmlHtmlEntities(term) + '</td></tr>';
     }).join('');
 
     var html = '<h1>Confirmed Errors — ' + escapeHtmlHtmlEntities(langLabel) + '</h1>' +
         '<div class="meta">' + list.length + ' reviewer-confirmed error(s) &nbsp;|&nbsp; Language: ' + escapeHtmlHtmlEntities(langKey) + '</div>' +
-        '<table><thead><tr><th>Date</th><th>Pillar</th><th>Severity</th><th>Confidence</th><th>Issue</th></tr></thead>' +
+        '<table><thead><tr><th>Confirmed Issue Term</th></tr></thead>' +
         '<tbody>' + rows + '</tbody></table>';
 
     var w = window.open('', '_blank');

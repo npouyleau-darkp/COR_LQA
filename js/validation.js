@@ -75,9 +75,16 @@ function _valRenderList(){
         if (_valCurrentTab === 'exceptions'){
             var list = getPendingExceptions(lang);
             list.forEach(function(entry, idx){
-                var term = (typeof entry === 'object') ? (entry.term || '') : entry;
-                var justification = (typeof entry === 'object') ? (entry.justification || '') : '';
-                items.push({ lang: lang, index: idx, text: term, justification: justification });
+                var isObj = (typeof entry === 'object');
+                items.push({
+                    lang: lang, index: idx,
+                    text:         isObj ? (entry.term          || '') : entry,
+                    justification:isObj ? (entry.justification || '') : '',
+                    date:         isObj ? (entry.date          || '') : '',
+                    pillar:       isObj ? (entry.pillar        || '') : '',
+                    severity:     isObj ? (entry.severity      || '') : '',
+                    confidence:   isObj ? (entry.confidence    || '') : ''
+                });
             });
         } else {
             var list2 = getPendingConfirmedErrors(lang);
@@ -96,9 +103,11 @@ function _valRenderList(){
     var html = '';
     if (_valCurrentTab === 'exceptions'){
         items.forEach(function(item, i){
+            var excMeta = [item.pillar, item.severity, item.confidence ? item.confidence + ' confidence' : '', item.date].filter(Boolean).join(' · ');
             html += '<div class="val-item">' +
                 '<span class="val-item-lang">' + escapeHtmlHtmlEntities(item.lang) + '</span>' +
                 '<div class="val-item-text">' + escapeHtmlHtmlEntities(item.text) + '</div>' +
+                (excMeta ? '<div class="val-item-meta">' + escapeHtmlHtmlEntities(excMeta) + '</div>' : '') +
                 (item.justification ? '<div class="val-item-meta">Justification: ' + escapeHtmlHtmlEntities(item.justification) + '</div>' : '') +
                 '<div class="val-item-actions">' +
                 '<button type="button" class="val-btn-accept" ' +
@@ -116,11 +125,9 @@ function _valRenderList(){
                 '<span class="val-item-lang">' + escapeHtmlHtmlEntities(item.lang) + '</span>' +
                 '<div class="val-item-text">' + escapeHtmlHtmlEntities(e.issue || '') + '</div>' +
                 '<div class="val-item-meta">' +
-                    escapeHtmlHtmlEntities(e.pillar || '') + ' &nbsp;&middot;&nbsp; ' +
-                    escapeHtmlHtmlEntities(e.severity || '') + ' &nbsp;&middot;&nbsp; ' +
-                    escapeHtmlHtmlEntities(e.confidence || '') + ' confidence' +
-                    (e.date ? ' &nbsp;&middot;&nbsp; ' + escapeHtmlHtmlEntities(e.date) : '') +
+                    [e.pillar, e.severity, e.confidence ? e.confidence + ' confidence' : '', e.date].filter(Boolean).map(escapeHtmlHtmlEntities).join(' · ') +
                 '</div>' +
+                (e.justification ? '<div class="val-item-meta">Justification: ' + escapeHtmlHtmlEntities(e.justification) + '</div>' : '') +
                 '<div class="val-item-actions">' +
                 '<button type="button" class="val-btn-accept" ' +
                     'onclick="_valAcceptError(\'' + _valEscAttr(item.lang) + '\',' + item.index + ',this)">' +
@@ -162,12 +169,16 @@ function _valAcceptError(lang, index, btn){
     var list = getPendingConfirmedErrors(lang);
     if (index < 0 || index >= list.length){ _valRenderList(); return; }
     var entry = list[index];
-    entry.issue = entry.issue || '';
+    var term = (entry.issue || '').trim();
     list.splice(index, 1);
     try { localStorage.setItem('lqaConfirmedErrors_pending_' + lang, JSON.stringify(list)); } catch(e) {}
-    var validated = getConfirmedErrors(lang);
-    validated.push(entry);
-    try { localStorage.setItem('lqaConfirmedErrors_' + lang, JSON.stringify(validated)); } catch(e) {}
+    if (term){
+        var validated = getConfirmedErrors(lang);
+        if (validated.indexOf(term) === -1){
+            validated.push(term);
+            try { localStorage.setItem('lqaConfirmedErrors_' + lang, JSON.stringify(validated)); } catch(e) {}
+        }
+    }
     _valRenderList();
 }
 

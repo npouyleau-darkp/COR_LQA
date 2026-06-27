@@ -19,13 +19,19 @@ function getPendingConfirmedErrors(key){
     catch (e) { return []; }
 }
 
-function addExceptionForLanguage(key, text, justification){
+function addExceptionForLanguage(key, text, justification, pillar, severity, confidence){
     var t = (text || '').trim();
     if (!t) return;
-    var j = (justification || '').trim();
     var pending = getPendingExceptions(key);
     var alreadyExists = pending.some(function(e){ return (e.term || e) === t; });
-    if (!alreadyExists) pending.push({ term: t, justification: j });
+    if (!alreadyExists) pending.push({
+        term: t,
+        justification: (justification || '').trim(),
+        date: new Date().toISOString().slice(0, 10),
+        pillar: (pillar || ''),
+        severity: (severity || ''),
+        confidence: (confidence || '')
+    });
     try { localStorage.setItem('lqaExceptions_pending_' + key, JSON.stringify(pending)); } catch (e) {}
     refreshExceptionsTracker();
 }
@@ -70,7 +76,7 @@ function getConfirmedErrors(langKey){
     catch (e) { return []; }
 }
 
-function addConfirmedError(langKey, pillar, severity, confidence, issueText){
+function addConfirmedError(langKey, pillar, severity, confidence, issueText, justification){
     var t = (issueText || '').trim();
     if (!t) return;
     var pending = getPendingConfirmedErrors(langKey);
@@ -79,7 +85,8 @@ function addConfirmedError(langKey, pillar, severity, confidence, issueText){
         pillar: (pillar || ''),
         severity: (severity || ''),
         confidence: (confidence || ''),
-        issue: t
+        issue: t,
+        justification: (justification || '').trim()
     });
     try { localStorage.setItem('lqaConfirmedErrors_pending_' + langKey, JSON.stringify(pending)); } catch (e) {}
     refreshExceptionsTracker();
@@ -91,8 +98,11 @@ function handleNotAnErrorClick(evt){
     var existingPopup = document.getElementById('notAnErrorPopup');
     if (existingPopup){ existingPopup.remove(); }
 
-    var issueText = btn.getAttribute('data-text') || '';
-    var langKey = btn.getAttribute('data-lang') || '';
+    var issueText  = btn.getAttribute('data-text')       || '';
+    var langKey    = btn.getAttribute('data-lang')       || '';
+    var pillar     = btn.getAttribute('data-pillar')     || '';
+    var severity   = btn.getAttribute('data-severity')   || '';
+    var confidence = btn.getAttribute('data-confidence') || '';
 
     var popup = document.createElement('div');
     popup.className = 'not-an-error-inline-popup';
@@ -113,7 +123,7 @@ function handleNotAnErrorClick(evt){
 
     popup.querySelector('.popup-confirm-btn').addEventListener('click', function(){
         var justification = popup.querySelector('.popup-explanation').value;
-        addExceptionForLanguage(langKey, issueText, justification);
+        addExceptionForLanguage(langKey, issueText, justification, pillar, severity, confidence);
         popup.remove();
         var badge = document.createElement('span');
         badge.className = 'badge badge-exception-confirmed';
@@ -148,6 +158,8 @@ function handleErrorConfirmedClick(evt){
         escapeHtmlHtmlEntities(pillar) + ' &nbsp;&middot;&nbsp; ' +
         escapeHtmlHtmlEntities(severity) + ' &nbsp;&middot;&nbsp; ' +
         escapeHtmlHtmlEntities(confidence) + ' confidence</div>' +
+        '<div class="popup-field-label">Your justification (optional)</div>' +
+        '<textarea class="popup-explanation" rows="2" placeholder="Why you are confirming this error..."></textarea>' +
         '<div class="popup-actions">' +
         '<button type="button" class="popup-confirm-btn">Confirm error</button>' +
         '<button type="button" class="popup-cancel-btn">Cancel</button>' +
@@ -158,7 +170,8 @@ function handleErrorConfirmedClick(evt){
     popup.querySelector('.popup-cancel-btn').addEventListener('click', function(){ popup.remove(); });
 
     popup.querySelector('.popup-confirm-btn').addEventListener('click', function(){
-        addConfirmedError(langKey, pillar, severity, confidence, issueText);
+        var justification = popup.querySelector('.popup-explanation').value;
+        addConfirmedError(langKey, pillar, severity, confidence, issueText, justification);
         popup.remove();
         var badge = document.createElement('span');
         badge.className = 'badge badge-reviewer-confirmed';
