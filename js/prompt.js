@@ -97,13 +97,13 @@
         ? "ISSUE FIELD RULE — NON-NEGOTIABLE: the \"issue\" field must be a short English label that names " +
           "the type of error and embeds the candidate's exact problematic word or phrase quoted verbatim in their " +
           "language, using the typographically correct quotation marks for that language " +
-          "(« » for French, „ ” for German, “ ” for English, " +
+          "(« » for French, \u201E \u201C for German, \u201C \u201D for English, " +
           "「」 for Japanese, 「」 for Korean, etc.). " +
           "The format must mirror Q3-1 style: [Brief English description] + [verbatim candidate text in correct quotes]. " +
           "Correct examples: " +
           "'Missing plural agreement in « des armures brillante »', " +
           "'Incorrect expression « en faite »', " +
-          "'Subject-verb agreement error in „He fight enemies”'. " +
+          "'Subject-verb agreement error in \u201EHe fight enemies\u201D'. " +
           "The verbatim candidate text in the issue field must never be translated or paraphrased. " +
           "The explanation field is where you explain the problem and correct form, entirely in English. "
         : "";
@@ -145,6 +145,17 @@
         "9-10: native-level, publication-ready; 7-8: good with minor issues; 5-6: acceptable but notable gaps; " +
         "3-4: insufficient for professional use; 1-2: poor or incomprehensible.";
 
+    var fluencyCriteriaClause = "";
+    var styleCriteriaClause = "";
+    if (questionIndex === '3_1' || questionIndex === '3_2'){
+        var fluencyRef = langInj.LANG_FLUENCY_CRITERIA || "";
+        var styleRef   = langInj.LANG_STYLE_CRITERIA   || "";
+        if (fluencyRef) fluencyCriteriaClause =
+            "FLUENCY CRITERIA (language-specific): " + fluencyRef + " ";
+        if (styleRef) styleCriteriaClause =
+            "STYLE CRITERIA (language-specific): " + styleRef + " ";
+    }
+
     var mqmReference =
         "FRAMEWORK: this evaluation aligns with MQM (Multidimensional Quality Metrics v2) and LISA QA standards. " +
         "Proficiency scale used is the official reference for " + selectedLangName + " (see PROFICIENCY ASSESSMENT below). ";
@@ -171,6 +182,8 @@
         'Do not invent mistakes. Only report issues when reasonably confident they are genuine. ' +
         'Do not classify stylistic preferences as spelling or grammar errors. ' +
         registerPolicy + ' ' +
+        fluencyCriteriaClause +
+        styleCriteriaClause +
         culturalNuanceClause + ' ' +
         regionalConsistencyClause + ' ' +
         exceptionsClause + ' ' +

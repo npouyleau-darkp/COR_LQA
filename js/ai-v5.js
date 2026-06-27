@@ -29,13 +29,24 @@ function renderStructuredLqaReport(parsedJson, rawFallbackText, questionIndex, r
                 var confClass = CONFIDENCE_BADGE_CLASS[issue.confidence] || "badge-conf-medium";
                 var issueTextRaw = issue.issue || "";
                 var explanationRaw = issue.explanation || "";
+                var conf = issue.confidence || "Medium";
+                var isLowConf = (conf === "Medium" || conf === "Low");
+                var errConfBtn = isLowConf
+                    ? '<button type="button" class="error-confirmed-btn"' +
+                      ' data-lang="' + escapeHtmlHtmlEntities(langKey) + '"' +
+                      ' data-pillar="' + escapeHtmlHtmlEntities(pillarKey) + '"' +
+                      ' data-severity="' + escapeHtmlHtmlEntities(issue.severity || "Minor") + '"' +
+                      ' data-confidence="' + escapeHtmlHtmlEntities(conf) + '"' +
+                      ' data-text="' + escapeHtmlHtmlEntities(issueTextRaw) + '">Error confirmed</button>'
+                    : '';
                 html += '<div class="issue-row">' +
                     '<div class="issue-text">' +
                     '<span class="badge ' + sevClass + '">' + escapeHtmlHtmlEntities(issue.severity || "Minor") + '</span>' +
-                    '<span class="badge ' + confClass + '">' + escapeHtmlHtmlEntities(issue.confidence || "Medium") + ' confidence</span><br>' +
+                    '<span class="badge ' + confClass + '">' + escapeHtmlHtmlEntities(conf) + ' confidence</span><br>' +
                     '<strong>' + escapeHtmlHtmlEntities(issueTextRaw) + '</strong>' +
                     (explanationRaw ? ' — ' + escapeHtmlHtmlEntities(explanationRaw) : '') +
                     '</div>' +
+                    errConfBtn +
                     '<button type="button" class="not-an-error-btn" data-lang="' + escapeHtmlHtmlEntities(langKey) +
                     '" data-text="' + escapeHtmlHtmlEntities(issueTextRaw) + '">Not an error</button>' +
                     '</div>';
@@ -91,6 +102,7 @@ function renderStructuredLqaReport(parsedJson, rawFallbackText, questionIndex, r
 
     rptBox.innerHTML = html;
     rptBox.querySelectorAll('.not-an-error-btn').forEach(function(btn){ btn.addEventListener('click', handleNotAnErrorClick); });
+    rptBox.querySelectorAll('.error-confirmed-btn').forEach(function(btn){ btn.addEventListener('click', handleErrorConfirmedClick); });
 }
 
 function renderTranslationReport(parsedJson, rawFallbackText, rptBox){
