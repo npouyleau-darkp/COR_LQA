@@ -33,7 +33,8 @@ function computeLqaTextDiffSegments(sourceText, targetText, mode){
 
 function executeLqaDiffAuditor(qi){
     var cand = document.getElementById('cand_q' + qi).value;
-    var ref = document.getElementById('ref_q' + qi).value;
+    var refEl = document.getElementById('correction_q' + qi) || document.getElementById('ref_q' + qi);
+    var ref = refEl ? refEl.value : '';
     var langMenu = document.getElementById('globalCandidateLanguage');
     var lang = langMenu ? langMenu.value : "en-US";
     var mode = (lang.indexOf("zh") === 0 || lang.indexOf("ja") === 0) ? "cjk" : "spaced";
@@ -42,11 +43,15 @@ function executeLqaDiffAuditor(qi){
 
     var box = document.getElementById('report_q' + qi);
     if (!box) return;
-    if (!cand.trim() && !ref.trim()){ box.innerHTML = '<span style="color:#dc2626;font-weight:600;">Error: Inputs are empty.</span>'; return; }
-
+    if (!cand.trim() && !ref.trim()){
+        box.innerHTML = '<span style="color:#dc2626;font-weight:600;">Error: Inputs are empty.</span>';
+        box.style.display = 'block';
+        return;
+    }
     var html = computeLqaTextDiffSegments(cand, ref, mode);
-    if (longFallback) html = '<div class="report-meta-note">⚠️ Long text — showing paragraph-level comparison.</div>' + html;
+    if (longFallback) html = '<div class="report-meta-note">Long text — showing paragraph-level comparison.</div>' + html;
     box.innerHTML = html;
+    box.style.display = 'block';
 }
 
 function runDiffSection(indices){ indices.forEach(executeLqaDiffAuditor); }
