@@ -64,8 +64,7 @@ function refreshExceptionsTracker(){
         : '';
 
     var confHtml = confirmed.length
-        ? ' &nbsp;|&nbsp; ' + confirmed.length + ' confirmed error(s)' +
-          ' <button type="button" onclick="exportConfirmedErrors(\'' + key.replace(/'/g, "\\'") + '\')">Download</button>'
+        ? ' &nbsp;|&nbsp; ' + confirmed.length + ' confirmed error(s) validated'
         : '';
 
     tracker.innerHTML = excHtml + pendingHtml + confHtml;
