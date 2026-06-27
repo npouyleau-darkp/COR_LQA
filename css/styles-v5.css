@@ -24,12 +24,11 @@ body { font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,sans-serif
 .config-input-field:focus, .config-select-menu:focus { border-color:#2563eb; outline:none; }
 .split-layout { display:flex; gap:24px; align-items:flex-start; margin-bottom:40px; }
 .main-content { flex:1; display:flex; flex-direction:column; gap:25px; }
-.todo-panel { width:220px; flex-shrink:0; position:sticky; top:80px; background:var(--panel-bg); border:1px solid var(--border-color); border-radius:10px; padding:16px 18px; box-sizing:border-box; transition:background-color .3s,border-color .3s; }
-.todo-panel-title { font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--title-color); margin:0 0 12px 0; display:flex; align-items:center; gap:6px; }
-.todo-item { display:flex; align-items:flex-start; gap:8px; margin-bottom:10px; font-size:12px; line-height:1.5; color:var(--text-color); }
-.todo-item:last-child { margin-bottom:0; }
+.todo-panel { background:var(--panel-bg); border:1px solid var(--border-color); border-radius:10px; padding:14px 20px; box-sizing:border-box; margin-bottom:24px; transition:background-color .3s,border-color .3s; }
+.todo-panel-title { font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; color:var(--title-color); margin:0 0 10px 0; }
+.todo-items-row { display:flex; flex-wrap:wrap; gap:10px 24px; }
+.todo-item { display:flex; align-items:flex-start; gap:6px; font-size:12px; line-height:1.5; color:var(--text-color); flex:0 1 auto; max-width:320px; }
 .todo-dot { width:7px; height:7px; border-radius:50%; background:#f59e0b; flex-shrink:0; margin-top:4px; }
-.todo-item a { color:inherit; text-decoration:none; }
 .grading-card { background:var(--panel-bg); border:1px solid var(--border-color); border-radius:10px; padding:25px; box-sizing:border-box; transition:background-color .3s ease,border-color .3s ease; }
 .section-title { color:var(--title-color); border-left:5px solid #2563eb; padding-left:12px; margin-bottom:25px; font-size:20px; font-weight:700; }
 .card-header-label { font-size:15px; font-weight:700; color:var(--title-color); margin-bottom:12px; display:block; }
@@ -84,6 +83,35 @@ textarea:focus { border-color:#2563eb; outline:none; }
 .score-value-display { font-size:20px; font-weight:800; min-width:32px; text-align:center; color:var(--title-color); margin-left:10px; }
 .ai-score-box { margin-top:12px; padding:10px 14px; border-radius:6px; background-color:#f0fdf4; border:1px solid #86efac; font-size:13.5px; color:#14532d; }
 .dark-mode .ai-score-box { background-color:#052e16; border-color:#4ade80; color:#bbf7d0; }
+
+/* ── Credentials Box ── */
+#credentialsBox { position:fixed; top:80px; right:20px; z-index:500; display:flex; flex-direction:column; gap:8px; background:var(--container-bg); border:1px solid var(--border-color); border-radius:10px; padding:14px 16px; box-shadow:0 4px 18px rgba(0,0,0,.18); min-width:180px; transition:background-color .3s ease,border-color .3s ease; }
+.cred-box-title { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#64748b; margin-bottom:2px; }
+.cred-input { padding:7px 10px; border:1px solid var(--border-color); border-radius:6px; background:var(--input-bg); color:var(--title-color); font-size:13px; width:100%; box-sizing:border-box; }
+.cred-enter-btn { padding:8px 0; border:none; border-radius:6px; background:#2563eb; color:#fff; font-size:13px; font-weight:700; cursor:pointer; transition:background .2s; }
+.cred-enter-btn:hover { background:#1d4ed8; }
+
+/* ── Validation Panel ── */
+#validationPanel { position:fixed; inset:0; z-index:1000; background:var(--bg-gradient); background-attachment:fixed; overflow-y:auto; }
+.val-header { position:sticky; top:0; z-index:10; background:var(--container-bg); border-bottom:1px solid var(--border-color); padding:14px 30px; display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+.val-back-btn { padding:8px 16px; border:1px solid var(--border-color); border-radius:6px; background:var(--input-bg); color:var(--text-color); font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap; transition:background .2s; }
+.val-back-btn:hover { background:#e2e8f0; }
+.dark-mode .val-back-btn:hover { background:#334155; }
+.val-title { font-size:18px; font-weight:700; color:var(--title-color); margin:0; flex:1; white-space:nowrap; }
+.val-tabs { display:flex; gap:6px; }
+.val-tab { padding:7px 16px; border:1px solid var(--border-color); border-radius:6px; background:var(--input-bg); color:var(--text-color); font-size:13px; font-weight:600; cursor:pointer; transition:background .2s,color .2s,border-color .2s; }
+.val-tab-active { background:#2563eb; color:#fff; border-color:#2563eb; }
+.val-list-container { max-width:860px; margin:30px auto; padding:0 20px 60px; display:flex; flex-direction:column; gap:14px; }
+.val-empty { background:var(--container-bg); border:1px solid var(--border-color); border-radius:10px; padding:30px; text-align:center; color:#64748b; font-size:14px; }
+.val-item { background:var(--container-bg); border:1px solid var(--border-color); border-radius:10px; padding:18px 20px; display:flex; flex-direction:column; gap:8px; transition:background-color .3s ease; }
+.val-item-lang { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#2563eb; }
+.val-item-text { font-size:14px; color:var(--title-color); line-height:1.5; word-break:break-word; }
+.val-item-meta { font-size:12px; color:#64748b; }
+.val-item-actions { display:flex; gap:8px; margin-top:4px; }
+.val-btn-accept { padding:7px 20px; border:none; border-radius:6px; background:#16a34a; color:#fff; font-size:13px; font-weight:700; cursor:pointer; transition:background .2s; }
+.val-btn-accept:hover { background:#15803d; }
+.val-btn-reject { padding:7px 20px; border:none; border-radius:6px; background:#dc2626; color:#fff; font-size:13px; font-weight:700; cursor:pointer; transition:background .2s; }
+.val-btn-reject:hover { background:#b91c1c; }
 .error-confirmed-btn { font-size:11px; padding:3px 8px; border-radius:5px; border:1px solid #15803d; background-color:#f0fdf4; color:#15803d; cursor:pointer; white-space:nowrap; margin-left:4px; }
 .error-confirmed-btn:hover { background-color:#dcfce7; }
 .dark-mode .error-confirmed-btn { background-color:#052e16; border-color:#4ade80; color:#4ade80; }

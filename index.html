@@ -109,24 +109,21 @@
             </div>
         </div>
 
-        <div class="split-layout">
-
-            <div class="todo-panel">
-                <div class="todo-panel-title">📋 To Do</div>
-
+        <div class="todo-panel">
+            <div class="todo-panel-title">📋 To Do</div>
+            <div class="todo-items-row">
                 <div class="todo-item"><span class="todo-dot"></span><span>Validation file — store confirmed errors with structured detail (link to session / candidate)</span></div>
-
                 <div class="todo-item"><span class="todo-dot"></span><span>Save "Not an error" justifications alongside exceptions (currently discarded after confirmation)</span></div>
-
-                <div class="todo-item"><span class="todo-dot"></span><span>Score cap rules after observation — e.g. ≥1 Major → max 6, ≥1 Critical → max 4</span></div>
-
+                <div class="todo-item"><span class="todo-dot"></span><span>Score cap rules after observation — e.g. &ge;1 Major &rarr; max 6, &ge;1 Critical &rarr; max 4</span></div>
                 <div class="todo-item"><span class="todo-dot"></span><span>"Error confirmed" + "Not an error" buttons on translation reports (Q 2-5 to 2-8)</span></div>
-
                 <div class="todo-item"><span class="todo-dot"></span><span>Teams webhook — not configured</span></div>
-
                 <div class="todo-item"><span class="todo-dot"></span><span>AI disclosure sentence in candidate email (EU AI Act Art. 50 — required for EU/UK candidates)</span></div>
+                <div class="todo-item"><span class="todo-dot"></span><span>Credentials: add SHA-256 hash protection for validation panel access (currently open)</span></div>
+                <div class="todo-item"><span class="todo-dot"></span><span>Multi-reviewer support: add reviewerId to pending items and per-reviewer filter in validation panel</span></div>
             </div>
+        </div>
 
+        <div class="split-layout">
             <div class="main-content">
 
                 <!-- SECTION A: LQA BUGS -->
@@ -326,6 +323,28 @@
     </div>
 </div>
 
+<div id="credentialsBox">
+    <div class="cred-box-title">Reviewer Access</div>
+    <input type="text" id="credId" class="cred-input" placeholder="ID (optional)">
+    <input type="password" id="credPw" class="cred-input" placeholder="Password (optional)">
+    <button type="button" class="cred-enter-btn" onclick="openValidationPanel()">Enter</button>
+</div>
+
+<div id="validationPanel" style="display:none;">
+    <div class="val-header">
+        <button type="button" class="val-back-btn" onclick="closeValidationPanel()">&#8592; Back to Dashboard</button>
+        <h2 class="val-title">Validation Panel</h2>
+        <div class="val-tabs">
+            <button type="button" id="valTabExceptions" class="val-tab val-tab-active" onclick="_valSwitchTab('exceptions')">Exceptions</button>
+            <button type="button" id="valTabErrors" class="val-tab" onclick="_valSwitchTab('errors')">Confirmed Errors</button>
+        </div>
+        <select id="valLangFilter" class="cred-input" style="min-width:180px;" onchange="_valRenderList()">
+            <option value="">— All Languages —</option>
+        </select>
+    </div>
+    <div id="valPendingList" class="val-list-container"></div>
+</div>
+
 <script src="js/config.js"></script>
 <script src="evaluation-system/data/language_data.js"></script>
 <script src="js/diff.js"></script>
@@ -334,6 +353,7 @@
 <script src="js/prompt.js"></script>
 <script src="js/ai-v5.js"></script>
 <script src="js/export.js"></script>
+<script src="js/validation.js"></script>
 <script>
     updateProviderUI();
     updateLanguageLockState();

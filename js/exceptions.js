@@ -5,21 +5,32 @@ function getExceptionsLangKey(qi){
 }
 
 function getExceptionsForLanguage(key){
-    try { return JSON.parse(localStorage.getItem('lqaExceptions_' + key) || "[]"); }
+    try { return JSON.parse(localStorage.getItem('lqaExceptions_' + key) || '[]'); }
+    catch (e) { return []; }
+}
+
+function getPendingExceptions(key){
+    try { return JSON.parse(localStorage.getItem('lqaExceptions_pending_' + key) || '[]'); }
+    catch (e) { return []; }
+}
+
+function getPendingConfirmedErrors(key){
+    try { return JSON.parse(localStorage.getItem('lqaConfirmedErrors_pending_' + key) || '[]'); }
     catch (e) { return []; }
 }
 
 function addExceptionForLanguage(key, text){
-    var list = getExceptionsForLanguage(key);
-    var t = (text || "").trim();
-    if (!t || list.indexOf(t) !== -1) return;
-    list.push(t);
-    try { localStorage.setItem('lqaExceptions_' + key, JSON.stringify(list)); } catch (e) {}
+    var t = (text || '').trim();
+    if (!t) return;
+    var pending = getPendingExceptions(key);
+    if (pending.indexOf(t) === -1) pending.push(t);
+    try { localStorage.setItem('lqaExceptions_pending_' + key, JSON.stringify(pending)); } catch (e) {}
     refreshExceptionsTracker();
 }
 
 function clearExceptionsForLanguage(key){
     try { localStorage.removeItem('lqaExceptions_' + key); } catch (e) {}
+    try { localStorage.removeItem('lqaExceptions_pending_' + key); } catch (e) {}
     refreshExceptionsTracker();
 }
 
@@ -29,18 +40,27 @@ function refreshExceptionsTracker(){
     var lang = document.getElementById('globalCandidateLanguage');
     var key = (lang && lang.value) ? lang.value : 'en-US';
     var label = (lang && lang.value) ? lang.options[lang.selectedIndex].text : 'no language selected yet';
-    var list = getExceptionsForLanguage(key);
+    var validated = getExceptionsForLanguage(key);
+    var pending = getPendingExceptions(key);
     var confirmed = getConfirmedErrors(key);
-    var excHtml = list.length
-        ? list.length + ' exception(s) for ' + escapeHtmlHtmlEntities(label) +
-          ' (' + escapeHtmlHtmlEntities(list.slice(0,3).join(', ')) + (list.length > 3 ? '&hellip;' : '') + ')' +
-          ' <button type="button" onclick="clearExceptionsForLanguage(\'' + key.replace(/'/g,"\\'") + '\')">Clear</button>'
-        : 'No exceptions saved yet for ' + escapeHtmlHtmlEntities(label) + '.';
+    var pendingErrors = getPendingConfirmedErrors(key);
+
+    var excHtml = validated.length
+        ? validated.length + ' exception(s) validated for ' + escapeHtmlHtmlEntities(label) +
+          ' (' + escapeHtmlHtmlEntities(validated.slice(0,3).join(', ')) + (validated.length > 3 ? '&hellip;' : '') + ')' +
+          ' <button type="button" onclick="clearExceptionsForLanguage(\'' + key.replace(/'/g, "\\'") + '\')">Clear all</button>'
+        : 'No validated exceptions for ' + escapeHtmlHtmlEntities(label) + '.';
+
+    var pendingHtml = (pending.length || pendingErrors.length)
+        ? ' &nbsp;|&nbsp; <span style="color:#b45309;">' + (pending.length + pendingErrors.length) + ' pending validation</span>'
+        : '';
+
     var confHtml = confirmed.length
         ? ' &nbsp;|&nbsp; ' + confirmed.length + ' confirmed error(s)' +
-          ' <button type="button" onclick="exportConfirmedErrors(\'' + key.replace(/'/g,"\\'") + '\')">Download</button>'
+          ' <button type="button" onclick="exportConfirmedErrors(\'' + key.replace(/'/g, "\\'") + '\')">Download</button>'
         : '';
-    tracker.innerHTML = excHtml + confHtml;
+
+    tracker.innerHTML = excHtml + pendingHtml + confHtml;
 }
 
 function getConfirmedErrors(langKey){
@@ -49,11 +69,17 @@ function getConfirmedErrors(langKey){
 }
 
 function addConfirmedError(langKey, pillar, severity, confidence, issueText){
-    var list = getConfirmedErrors(langKey);
     var t = (issueText || '').trim();
     if (!t) return;
-    list.push({ date: new Date().toISOString().slice(0,10), pillar: pillar, severity: severity, confidence: confidence, issue: t });
-    try { localStorage.setItem('lqaConfirmedErrors_' + langKey, JSON.stringify(list)); } catch (e) {}
+    var pending = getPendingConfirmedErrors(langKey);
+    pending.push({
+        date: new Date().toISOString().slice(0, 10),
+        pillar: (pillar || ''),
+        severity: (severity || ''),
+        confidence: (confidence || ''),
+        issue: t
+    });
+    try { localStorage.setItem('lqaConfirmedErrors_pending_' + langKey, JSON.stringify(pending)); } catch (e) {}
     refreshExceptionsTracker();
 }
 
@@ -88,7 +114,7 @@ function handleNotAnErrorClick(evt){
         popup.remove();
         var badge = document.createElement('span');
         badge.className = 'badge badge-exception-confirmed';
-        badge.textContent = 'Exception confirmed';
+        badge.textContent = 'Pending validation';
         var issueTextEl = row ? row.querySelector('.issue-text') : null;
         if (issueTextEl) issueTextEl.appendChild(badge);
         btn.textContent = 'Saved ✓';
@@ -114,10 +140,10 @@ function handleErrorConfirmedClick(evt){
     popup.innerHTML =
         '<div class="popup-field-label">Error to confirm</div>' +
         '<textarea class="popup-excerpt" rows="2" readonly>' + escapeHtmlHtmlEntities(issueText) + '</textarea>' +
-        '<div class="popup-field-label">Pillar &nbsp;·&nbsp; Severity &nbsp;·&nbsp; Confidence</div>' +
+        '<div class="popup-field-label">Pillar &nbsp;&middot;&nbsp; Severity &nbsp;&middot;&nbsp; Confidence</div>' +
         '<div style="font-size:13px; color:var(--text-color); padding:4px 0;">' +
-        escapeHtmlHtmlEntities(pillar) + ' &nbsp;·&nbsp; ' +
-        escapeHtmlHtmlEntities(severity) + ' &nbsp;·&nbsp; ' +
+        escapeHtmlHtmlEntities(pillar) + ' &nbsp;&middot;&nbsp; ' +
+        escapeHtmlHtmlEntities(severity) + ' &nbsp;&middot;&nbsp; ' +
         escapeHtmlHtmlEntities(confidence) + ' confidence</div>' +
         '<div class="popup-actions">' +
         '<button type="button" class="popup-confirm-btn">Confirm error</button>' +
@@ -133,10 +159,10 @@ function handleErrorConfirmedClick(evt){
         popup.remove();
         var badge = document.createElement('span');
         badge.className = 'badge badge-reviewer-confirmed';
-        badge.textContent = 'Reviewer Confirmed';
+        badge.textContent = 'Pending validation';
         var issueTextEl = row ? row.querySelector('.issue-text') : null;
         if (issueTextEl) issueTextEl.appendChild(badge);
-        btn.textContent = 'Confirmed ✓';
+        btn.textContent = 'Saved ✓';
         btn.disabled = true;
     });
 }
