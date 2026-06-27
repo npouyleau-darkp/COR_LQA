@@ -167,48 +167,21 @@ function exportDashboardToPdf(){
 function exportConfirmedErrors(langKey){
     var list = getConfirmedErrors(langKey);
     if (!list.length){ alert('No confirmed errors saved for this language.'); return; }
-    var lang = document.getElementById('globalCandidateLanguage');
-    var langLabel = (lang && lang.value && lang.options[lang.selectedIndex])
-        ? lang.options[lang.selectedIndex].text : langKey;
-
-    var css = [
-        'body { font-family: Segoe UI, Arial, sans-serif; padding: 32px 40px; color: #1e293b; font-size: 14px; line-height: 1.6; }',
-        'h1 { font-size: 22px; font-weight: 800; color: #0f172a; margin: 0 0 4px 0; }',
-        '.meta { font-size: 13px; color: #64748b; margin-bottom: 24px; }',
-        'table { width: 100%; border-collapse: collapse; font-size: 13px; }',
-        'th { text-align: left; padding: 8px 12px; background: #0f172a; color: #fff; font-size: 12px; letter-spacing: 0.04em; }',
-        'td { padding: 8px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }',
-        'tr:nth-child(even) td { background: #f8fafc; }',
-        '.badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 10px; }',
-        '.badge-minor { background:#f59e0b; color:#1e293b; }',
-        '.badge-major { background:#dc2626; color:#fff; }',
-        '.badge-critical { background:#7f1d1d; color:#fff; }',
-        '.badge-conf-medium { background:#ca8a04; color:#fff; }',
-        '.badge-conf-low { background:#64748b; color:#fff; }',
-        '@media print { body { padding: 16px; } }'
-    ].join('\n');
-
-    var rows = list.map(function(e){
-        var sevClass = { Critical:'badge-critical', Major:'badge-major', Minor:'badge-minor' }[e.severity] || 'badge-minor';
-        var confClass = { Medium:'badge-conf-medium', Low:'badge-conf-low' }[e.confidence] || 'badge-conf-medium';
-        return '<tr><td>' + escapeHtmlHtmlEntities(e.date || '') + '</td>' +
-            '<td>' + escapeHtmlHtmlEntities(e.pillar || '') + '</td>' +
-            '<td><span class="badge ' + sevClass + '">' + escapeHtmlHtmlEntities(e.severity || '') + '</span></td>' +
-            '<td><span class="badge ' + confClass + '">' + escapeHtmlHtmlEntities(e.confidence || '') + '</span></td>' +
-            '<td>' + escapeHtmlHtmlEntities(e.issue || '') + '</td></tr>';
-    }).join('');
-
-    var html = '<h1>Confirmed Errors — ' + escapeHtmlHtmlEntities(langLabel) + '</h1>' +
-        '<div class="meta">' + list.length + ' reviewer-confirmed error(s) &nbsp;|&nbsp; Language: ' + escapeHtmlHtmlEntities(langKey) + '</div>' +
-        '<table><thead><tr><th>Date</th><th>Pillar</th><th>Severity</th><th>Confidence</th><th>Issue</th></tr></thead>' +
-        '<tbody>' + rows + '</tbody></table>';
-
-    var w = window.open('', '_blank');
-    w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Confirmed Errors</title><style>' + css + '</style></head><body>' + html + '</body></html>');
-    w.document.close();
-    w.focus();
-    w.onafterprint = function(){ w.close(); };
-    w.print();
+    var date = new Date().toISOString().slice(0, 10);
+    var payload = {
+        language: langKey,
+        exportDate: date,
+        confirmedTerms: list.map(function(e){ return (typeof e === 'string') ? e : (e.issue || ''); })
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'confirmed-errors-' + langKey + '-' + date + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
 
 // Stub: Teams webhook URL not configured yet.

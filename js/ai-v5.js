@@ -31,6 +31,8 @@ function renderStructuredLqaReport(parsedJson, rawFallbackText, questionIndex, r
                 var explanationRaw = issue.explanation || "";
                 var conf = issue.confidence || "Medium";
                 var isLowConf = (conf === "Medium" || conf === "Low");
+                var confirmedTerms = getConfirmedErrors(langKey);
+                var isReviewerConfirmed = confirmedTerms.indexOf(issueTextRaw) !== -1;
                 var errConfBtn = isLowConf
                     ? '<button type="button" class="error-confirmed-btn"' +
                       ' data-lang="' + escapeHtmlHtmlEntities(langKey) + '"' +
@@ -42,13 +44,19 @@ function renderStructuredLqaReport(parsedJson, rawFallbackText, questionIndex, r
                 html += '<div class="issue-row">' +
                     '<div class="issue-text">' +
                     '<span class="badge ' + sevClass + '">' + escapeHtmlHtmlEntities(issue.severity || "Minor") + '</span>' +
-                    '<span class="badge ' + confClass + '">' + escapeHtmlHtmlEntities(conf) + ' confidence</span><br>' +
+                    '<span class="badge ' + confClass + '">' + escapeHtmlHtmlEntities(conf) + ' confidence</span>' +
+                    (isReviewerConfirmed ? '<span class="badge badge-reviewer-confirmed">Reviewer Confirmed</span>' : '') +
+                    '<br>' +
                     '<strong>' + escapeHtmlHtmlEntities(issueTextRaw) + '</strong>' +
                     (explanationRaw ? ' — ' + escapeHtmlHtmlEntities(explanationRaw) : '') +
                     '</div>' +
                     errConfBtn +
-                    '<button type="button" class="not-an-error-btn" data-lang="' + escapeHtmlHtmlEntities(langKey) +
-                    '" data-text="' + escapeHtmlHtmlEntities(issueTextRaw) + '">Not an error</button>' +
+                    '<button type="button" class="not-an-error-btn"' +
+                    ' data-lang="' + escapeHtmlHtmlEntities(langKey) + '"' +
+                    ' data-pillar="' + escapeHtmlHtmlEntities(pillarKey) + '"' +
+                    ' data-severity="' + escapeHtmlHtmlEntities(issue.severity || "Minor") + '"' +
+                    ' data-confidence="' + escapeHtmlHtmlEntities(conf) + '"' +
+                    ' data-text="' + escapeHtmlHtmlEntities(issueTextRaw) + '">Not an error</button>' +
                     '</div>';
             });
         }
